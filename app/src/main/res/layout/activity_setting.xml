@@ -20,8 +20,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="setting"
-            android:textSize="25dp"
+            android:text="Setting"
+            android:textSize="25sp"
             android:textColor="@color/transparent"
             android:layout_marginLeft="120dp"
             />
