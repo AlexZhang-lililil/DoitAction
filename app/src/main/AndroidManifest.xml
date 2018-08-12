@@ -17,7 +17,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MenuActivity" />
-        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".BookmarksActivity" />
+        <activity android:name=".MyAchievementActivity" />
+        <activity android:name=".SuggestionHistoryActivity"></activity>
     </application>
 
 </manifest>

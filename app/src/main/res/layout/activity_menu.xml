@@ -44,10 +44,18 @@
                 android:layout_marginLeft="110dp"/>
 
         </android.support.v7.widget.Toolbar>
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/srh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/search_shape"
+            app:defaultQueryHint="Search Action and Do it!"></android.support.v7.widget.SearchView>
 </LinearLayout>
     
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="left"
@@ -55,13 +63,48 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:text="menu"
             android:textAlignment="center"
             android:textColor="@color/transparent"
             android:background="@color/colorPrimary"
             android:textSize="35sp"
             />
+        <TextView
+            android:id="@+id/txt_bookmarks"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:text="Bookmarks"
+            android:textSize="25sp"
+            android:drawableLeft="@drawable/icon_bookmark"
+            android:textAlignment="center"
+            android:clickable="true"
+            />
+        <TextView
+            android:id="@+id/txt_achievements"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="My Achievements"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/icon_trophy"
+            android:textAlignment="center"
+            android:clickable="true"
+            />
+        <TextView
+            android:id="@+id/txt_suggestion_history"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Suggestion History"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/icon_history"
+            android:textAlignment="center"
+            android:clickable="true"
+            />
+
 
     </LinearLayout>
 
