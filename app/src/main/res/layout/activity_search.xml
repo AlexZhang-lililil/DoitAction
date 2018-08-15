@@ -10,11 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
+
         <Button
-            android:id="@+id/btn_back_bookmarks"
-            android:layout_height="30dp"
+            android:id="@+id/btn_back_search"
             android:layout_width="30dp"
-            android:background="@drawable/icon_back"/>
+            android:layout_height="30dp"
+            android:background="@drawable/icon_back"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="13dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,11 +52,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="TextView"
+        android:text="?android:attr/candidatesTextStyleSpans"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/box_searchbar"
-        tools:text="Recent Searces ..." />
+        tools:text="Recent Searches ..." />
 
     <MultiAutoCompleteTextView
         android:id="@+id/box_searchbar"
@@ -62,6 +65,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="MultiAutoCompleteTextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_bookmarks"
