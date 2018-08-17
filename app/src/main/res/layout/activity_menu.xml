@@ -37,21 +37,14 @@
                 android:layout_marginLeft="110dp"
                 />
             <Button
-                android:id="@+id/btn_setting"
+                android:id="@+id/btn_search"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/icon_setting"
+                android:background="@drawable/icon_search"
                 android:layout_marginLeft="110dp"/>
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.v7.widget.SearchView
-            android:id="@+id/srh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/search_shape"
-            app:defaultQueryHint="Search Action and Do it!"></android.support.v7.widget.SearchView>
 </LinearLayout>
     
     <LinearLayout
@@ -104,6 +97,16 @@
             android:textAlignment="center"
             android:clickable="true"
             />
+        <TextView
+            android:id="@+id/txt_setting"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Settings"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/icon_setting2"
+            android:textAlignment="center"
+            android:clickable="true"/>
 
 
     </LinearLayout>
