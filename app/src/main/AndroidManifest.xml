@@ -20,8 +20,9 @@
         <activity android:name=".SettingActivity" />
         <activity android:name=".BookmarksActivity" />
         <activity android:name=".MyAchievementActivity" />
-        <activity android:name=".SuggestionHistoryActivity"></activity>
-        <activity android:name=".SearchActivity"/>
+        <activity android:name=".SuggestionHistoryActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".ActionActivity"></activity>
     </application>
 
 </manifest>
