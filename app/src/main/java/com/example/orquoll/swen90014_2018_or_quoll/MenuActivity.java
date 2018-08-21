@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.orquoll.swen90014_2018_or_quoll.Adapters.MenuSuggestionAdapter;
+import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.ActionDAOImp;
+import com.example.orquoll.swen90014_2018_or_quoll.db.MyDatabaseHelper;
+import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -25,6 +28,9 @@ public class MenuActivity extends AppCompatActivity {
     private TextView txt_achievement;
     private TextView txt_setting;
     private RecyclerView rv_suggestion;
+    private MyDatabaseHelper dbHelper;
+    private Button btn_test;
+    private Button btn_test2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,8 @@ public class MenuActivity extends AppCompatActivity {
         txt_history = (TextView) findViewById(R.id.txt_suggestion_history);
         btn_search = (Button) findViewById(R.id.btn_search);
         rv_suggestion = (RecyclerView)findViewById(R.id.rv_suggestion);
+        btn_test = (Button) findViewById( R.id.btn_test );
+        btn_test2 = (Button) findViewById( R.id.btn_test );
 
 
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +61,32 @@ public class MenuActivity extends AppCompatActivity {
         rv_suggestion.setLayoutManager(new LinearLayoutManager(MenuActivity.this));
         rv_suggestion.setAdapter(new MenuSuggestionAdapter(MenuActivity.this));
         rv_suggestion.addItemDecoration(new Decoration());
+
+
+        //test
+        btn_test.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Action action_1 = new Action("Mindful Thoughts Practise","Lorem ipsum dolor sit amet",false);
+                Action action_2 = new Action("Mindful Thoughts Practise2","Lorem ipsum dolor sit amet",false);
+                Action action_3 = new Action("Mindful Thoughts Practise3","Lorem ipsum dolor sit amet",false);
+                Action action_4 = new Action("Mindful Thoughts Practise4","Lorem ipsum dolor sit amet",false);
+
+                ActionDAOImp newDAO = new ActionDAOImp( dbHelper );
+                newDAO.insert( action_1 );
+                newDAO.insert( action_2 );
+                newDAO.insert( action_3 );
+                newDAO.insert( action_4 );
+            }
+        } );
+
+        btn_test.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActionDAOImp newDAO = new ActionDAOImp( dbHelper );
+                newDAO.display();
+            }
+        } );
 
     }
 
@@ -92,6 +126,7 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
+    //draw the lines between items
     class Decoration extends RecyclerView.ItemDecoration{
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state){
             super.getItemOffsets(outRect,view,parent,state);
