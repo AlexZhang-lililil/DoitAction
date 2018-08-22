@@ -25,6 +25,7 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
     }
 
 
+    DAOFactory newDAOFactory = new DAOFactory();
 
     @NonNull
     @Override
@@ -35,7 +36,6 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
     @Override
     public void onBindViewHolder(@NonNull MenuSuggestionAdapter.LinearViewHolder viewHolder, int i) {
 
-        DAOFactory newDAOFactory = new DAOFactory();
         Action[] actions = new Action[newDAOFactory.getActionDAOImpInstance().display().length];
         actions = newDAOFactory.getActionDAOImpInstance().display();
         final String tittle = actions[i].getActionTittle();
@@ -57,7 +57,8 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
 
     @Override
     public int getItemCount() {
-        return 10;
+
+        return newDAOFactory.getActionDAOImpInstance().display().length;
     }
 
     class LinearViewHolder extends RecyclerView.ViewHolder {

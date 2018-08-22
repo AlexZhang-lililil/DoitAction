@@ -66,7 +66,7 @@ public class MenuActivity extends AppCompatActivity {
         rv_suggestion.setLayoutManager(new LinearLayoutManager(MenuActivity.this));
         rv_suggestion.setAdapter(new MenuSuggestionAdapter(MenuActivity.this));
         rv_suggestion.addItemDecoration(new Decoration());
-        Connector.getDatabase();
+
 
         //test
         btn_test.setOnClickListener( new View.OnClickListener() {
