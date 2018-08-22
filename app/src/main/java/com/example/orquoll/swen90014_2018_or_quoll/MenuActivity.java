@@ -1,5 +1,6 @@
 package com.example.orquoll.swen90014_2018_or_quoll;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.support.v4.widget.DrawerLayout;
@@ -7,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.orquoll.swen90014_2018_or_quoll.Adapters.MenuSuggestionAdapter;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
@@ -48,7 +51,7 @@ public class MenuActivity extends AppCompatActivity {
         btn_search = (Button) findViewById(R.id.btn_search);
         rv_suggestion = (RecyclerView)findViewById(R.id.rv_suggestion);
         btn_test = (Button) findViewById( R.id.btn_test );
-        btn_test2 = (Button) findViewById( R.id.btn_test );
+        btn_test2 = (Button) findViewById( R.id.btn_test2 );
 
 
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -82,10 +85,10 @@ public class MenuActivity extends AppCompatActivity {
             }
         } );
 
-        btn_test.setOnClickListener( new View.OnClickListener() {
+        btn_test2.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                newFactory.getActionDAOImpInstance().display();
             }
         } );
 

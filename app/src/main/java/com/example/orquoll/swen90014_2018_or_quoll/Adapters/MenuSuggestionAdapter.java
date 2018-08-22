@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.orquoll.swen90014_2018_or_quoll.ActionActivity;
 import com.example.orquoll.swen90014_2018_or_quoll.R;
+import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
+import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 
 
 public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAdapter.LinearViewHolder> {
@@ -33,13 +35,20 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
     @Override
     public void onBindViewHolder(@NonNull MenuSuggestionAdapter.LinearViewHolder viewHolder, int i) {
 
-        viewHolder.action_tittle.setText("tittle"+i);
-        viewHolder.action_content.setText("content"+i);
+        DAOFactory newDAOFactory = new DAOFactory();
+        Action[] actions = new Action[newDAOFactory.getActionDAOImpInstance().display().length];
+        actions = newDAOFactory.getActionDAOImpInstance().display();
+        final String tittle = actions[i].getActionTittle();
+        final String content = actions[i].getActionContent();
+        viewHolder.action_tittle.setText(tittle);
+        viewHolder.action_content.setText(content);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass( mContext,ActionActivity.class );
+                intent.putExtra( "Tittle",tittle );
+                intent.putExtra( "Content",content );
                 mContext.startActivity(intent);
             }
         });
@@ -48,7 +57,7 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 10;
     }
 
     class LinearViewHolder extends RecyclerView.ViewHolder {

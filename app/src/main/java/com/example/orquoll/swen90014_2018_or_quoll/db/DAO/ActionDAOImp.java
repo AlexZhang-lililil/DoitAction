@@ -1,9 +1,10 @@
 package com.example.orquoll.swen90014_2018_or_quoll.db.DAO;
 
-
-import android.util.Log;
-
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
+
+import org.litepal.LitePal;
+
+import java.util.List;
 
 public class ActionDAOImp implements ActionDAO {
 
@@ -16,13 +17,17 @@ public class ActionDAOImp implements ActionDAO {
 
     public void insert(Action newAction){
         newAction.save();
-        Log.d( "MenuActivity","insert complete" );
 
     }
 
     @Override
     public Action[] display(){
 
-        return null;
+
+        List<Action> actions = LitePal.findAll( Action.class );
+        Action[] actions_1 = new Action[actions.size()];
+        actions.toArray(actions_1);
+
+        return actions_1;
     }
 }
