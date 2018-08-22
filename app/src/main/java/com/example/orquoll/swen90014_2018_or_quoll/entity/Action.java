@@ -1,6 +1,8 @@
 package com.example.orquoll.swen90014_2018_or_quoll.entity;
 
-public class Action {
+import org.litepal.crud.LitePalSupport;
+
+public class Action extends LitePalSupport {
     private String actionTittle;
     private String actionContent;
     private boolean actionMarked;

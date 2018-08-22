@@ -3,6 +3,7 @@
     package="com.example.orquoll.swen90014_2018_or_quoll">
 
     <application
+        android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Do-It!"
