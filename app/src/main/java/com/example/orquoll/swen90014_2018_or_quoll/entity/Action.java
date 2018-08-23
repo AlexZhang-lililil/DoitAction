@@ -6,6 +6,7 @@ public class Action extends LitePalSupport {
     private String actionTittle;
     private String actionContent;
     private boolean actionMarked;
+    private String id;
 
     public Action(String actionTittle, String actionContent, boolean actionMarked) {
         this.actionTittle = actionTittle;
@@ -18,6 +19,13 @@ public class Action extends LitePalSupport {
         this.actionContent = actionContent;
     }
 
+    public Action(){
+
+    }
+
+    public String getId() {
+        return id;
+    }
     public String getActionTittle() {
         return actionTittle;
     }

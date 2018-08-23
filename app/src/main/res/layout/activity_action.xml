@@ -24,6 +24,13 @@
             android:textColor="@color/transparent"
             android:layout_marginLeft="120dp"
             />
+        
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="90dp"
+            android:id="@+id/btn_mark"
+            />
     </Toolbar>
     <ScrollView
         android:layout_width="match_parent"

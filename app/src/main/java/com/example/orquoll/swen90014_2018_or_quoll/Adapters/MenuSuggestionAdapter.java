@@ -2,6 +2,7 @@ package com.example.orquoll.swen90014_2018_or_quoll.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
         actions = newDAOFactory.getActionDAOImpInstance().display();
         final String tittle = actions[i].getActionTittle();
         final String content = actions[i].getActionContent();
+        final String id = actions[i].getId();
         viewHolder.action_tittle.setText(tittle);
         viewHolder.action_content.setText(content);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -47,8 +49,11 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass( mContext,ActionActivity.class );
-                intent.putExtra( "Tittle",tittle );
-                intent.putExtra( "Content",content );
+                Bundle actionBundle = new Bundle();
+                actionBundle.putString("Tittle",tittle);
+                actionBundle.putString("Content",content);
+                actionBundle.putString("Id",id);
+                intent.putExtras( actionBundle );
                 mContext.startActivity(intent);
             }
         });
