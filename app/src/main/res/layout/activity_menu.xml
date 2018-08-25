@@ -115,6 +115,21 @@
             android:textAlignment="center"
             android:clickable="true"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_test"
+            android:text="test"
+            android:layout_gravity="center"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_test2"
+            android:text="display"
+            android:layout_gravity="center"/>
+
 
     </LinearLayout>
 
