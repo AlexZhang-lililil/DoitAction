@@ -32,13 +32,13 @@ public class ActionDAOImp implements ActionDAO {
     }
 
     @Override
-    public Action searchById(String id){
-        List<Action> action = LitePal.where("id = ?",id).find(Action.class);
+    public Action searchById(Long id){
+        List<Action> action = LitePal.where("id = ?",id.toString()).find(Action.class);
 
         return action.get(0);
     }
     @Override
-    public void markAction (String actionId){
+    public void markAction (Long actionId){
 
         Action actionMark = new Action();
         actionMark = searchById(actionId);

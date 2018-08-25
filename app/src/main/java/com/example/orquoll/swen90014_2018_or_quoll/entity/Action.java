@@ -6,7 +6,7 @@ public class Action extends LitePalSupport {
     private String actionTittle;
     private String actionContent;
     private boolean actionMarked;
-    private String id;
+    private long id;
 
     public Action(String actionTittle, String actionContent, boolean actionMarked) {
         this.actionTittle = actionTittle;
@@ -23,7 +23,7 @@ public class Action extends LitePalSupport {
 
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
     public String getActionTittle() {

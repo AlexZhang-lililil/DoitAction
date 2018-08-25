@@ -41,7 +41,7 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
         actions = newDAOFactory.getActionDAOImpInstance().display();
         final String tittle = actions[i].getActionTittle();
         final String content = actions[i].getActionContent();
-        final String id = actions[i].getId();
+        final Long id = actions[i].getId();
         viewHolder.action_tittle.setText(tittle);
         viewHolder.action_content.setText(content);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +52,7 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
                 Bundle actionBundle = new Bundle();
                 actionBundle.putString("Tittle",tittle);
                 actionBundle.putString("Content",content);
-                actionBundle.putString("Id",id);
+                actionBundle.putLong("Id",id);
                 intent.putExtras( actionBundle );
                 mContext.startActivity(intent);
             }

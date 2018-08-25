@@ -4,6 +4,7 @@ import android.app.backup.SharedPreferencesBackupHelper;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,16 +14,20 @@ import android.widget.Button;
 import android.widget.SearchView;
 
 import com.example.orquoll.swen90014_2018_or_quoll.Adapters.SearchAdapter;
+import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
+import com.example.orquoll.swen90014_2018_or_quoll.fragment.SearchHistoryFragment;
 
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
+    private DAOFactory newDAOFactory;
     private Button btn_back;
     private SearchView search;
     private RecyclerView rv_search;
     private SearchAdapter newSearchAdapter;
     private ArrayList<String> searchTagList;
+    private SearchHistoryFragment historyFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +35,20 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         searchTagList = new ArrayList<String>();
+        historyFragment = new SearchHistoryFragment();
         btn_back = (Button) findViewById(R.id.btn_back_search);
         search = (SearchView) findViewById(R.id.srh) ;
         rv_search = (RecyclerView) findViewById(R.id.rv_search);
 
         initialize();
 
+        //getSupportFragmentManager().beginTransaction().add( R.id.fl_container,historyFragment ).commit();
+
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                searchTagList.add(s);
+
+                newDAOFactory.getSearchRecorDAOImp().insertNewRecord( s );
 
                 return false;
             }
@@ -74,6 +83,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void initialize(){
+        this.newDAOFactory = new DAOFactory();
         this.newSearchAdapter = new SearchAdapter(this);
         search.setIconifiedByDefault(false);
         search.setSubmitButtonEnabled(true);

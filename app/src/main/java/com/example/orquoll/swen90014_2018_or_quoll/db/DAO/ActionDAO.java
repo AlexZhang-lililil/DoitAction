@@ -7,10 +7,10 @@ public interface ActionDAO {
 
     public Action[] display();
 
-    public void markAction(String actionId );
+    public void markAction(Long actionId );
 
     public Action[] displayMarkedAction();
 
-    public Action searchById(String actionId);
+    public Action searchById(Long actionId);
 
 }

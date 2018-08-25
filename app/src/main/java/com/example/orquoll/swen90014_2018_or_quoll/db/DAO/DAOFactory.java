@@ -5,4 +5,8 @@ public class DAOFactory {
     public  ActionDAOImp getActionDAOImpInstance(){
         return new ActionDAOImp();
     }
+
+    public SearchRecordDAOImp getSearchRecorDAOImp(){
+        return new SearchRecordDAOImp();
+    }
 }

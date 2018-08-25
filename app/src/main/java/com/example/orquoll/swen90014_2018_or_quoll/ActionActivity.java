@@ -14,7 +14,7 @@ public class ActionActivity extends AppCompatActivity {
     private Button btn_back;
     private TextView txt_content;
     private TextView txt_tittle;
-    private String actionId;
+    private Long actionId;
     private Button btn_bookmark;
 
     @Override
@@ -38,7 +38,7 @@ public class ActionActivity extends AppCompatActivity {
         Bundle actionBundle = getIntent().getExtras();
         txt_tittle.setText(actionBundle.getString("Tittle"));
         txt_content.setText( actionBundle.getString("Content"));
-        actionId = actionBundle.getString("Id");
+        actionId = actionBundle.getLong("Id");
 
         setMarkState(actionId);
 
@@ -54,7 +54,7 @@ public class ActionActivity extends AppCompatActivity {
 
 
     }
-    public void setMarkState(String actionId){
+    public void setMarkState(Long actionId){
         DAOFactory newFactory = new DAOFactory();
         if(newFactory.getActionDAOImpInstance().searchById(actionId).isActionMarked()) {
             btn_bookmark.setBackground(getResources().getDrawable(R.drawable.icon_bookmark3));

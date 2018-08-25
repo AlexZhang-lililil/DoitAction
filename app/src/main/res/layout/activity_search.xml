@@ -34,9 +34,21 @@
         android:id="@+id/srh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:queryHint="Search and Do it!"
         android:background="@drawable/search_shape" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fl_container">
+
+        <fragment
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.example.orquoll.swen90014_2018_or_quoll.fragment.SearchHistoryFragment"/>
+    </FrameLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
