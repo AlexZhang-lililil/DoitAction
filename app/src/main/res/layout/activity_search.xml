@@ -38,29 +38,9 @@
         android:queryHint="Search and Do it!"
         android:background="@drawable/search_shape" />
 
-    <TextView
-        android:id="@+id/txt_recentsearches"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:text="?android:attr/candidatesTextStyleSpans"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/box_searchbar"
-        tools:text="Recent Searches ..." />
-
-    <MultiAutoCompleteTextView
-        android:id="@+id/box_searchbar"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="MultiAutoCompleteTextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb_bookmarks"
-        tools:text="Search" />
-
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_search"
+        android:background="@color/lightGray"></android.support.v7.widget.RecyclerView>
 </LinearLayout>
