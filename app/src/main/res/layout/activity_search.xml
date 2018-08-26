@@ -43,10 +43,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/fl_container">
 
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.example.orquoll.swen90014_2018_or_quoll.fragment.SearchHistoryFragment"/>
+
     </FrameLayout>
 
 

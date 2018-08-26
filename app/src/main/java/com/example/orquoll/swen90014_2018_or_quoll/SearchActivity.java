@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -49,6 +51,7 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String s) {
 
                 newDAOFactory.getSearchRecorDAOImp().insertNewRecord( s );
+                removeFragment( historyFragment );
 
                 return false;
             }
@@ -56,9 +59,25 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String s) {
                 if(!TextUtils.isEmpty(s.trim())){
+                    //display the search history when there are some records
+                    if(newDAOFactory.getSearchRecorDAOImp().display().length != 0)
+                        replaceFragment( historyFragment );
+                    else
+                        removeFragment( historyFragment );
+
+                    //dynamically display search results
+
+                    newSearchAdapter.setSearchActions( newDAOFactory.getActionDAOImpInstance().fuzzySearch( s ) );
+                    newSearchAdapter.notifyDataSetChanged();
 
                 }else{
-                    searchTagList.clear();
+
+                    if(newDAOFactory.getSearchRecorDAOImp().display().length != 0)
+                        replaceFragment( historyFragment );
+                    else
+                        removeFragment( historyFragment );
+
+                    newSearchAdapter.setSearchActions( newDAOFactory.getActionDAOImpInstance().display() );
                     newSearchAdapter.notifyDataSetChanged();
                 }
                 return false;
@@ -84,12 +103,26 @@ public class SearchActivity extends AppCompatActivity {
 
     public void initialize(){
         this.newDAOFactory = new DAOFactory();
-        this.newSearchAdapter = new SearchAdapter(this);
+        this.newSearchAdapter = new SearchAdapter(this,newDAOFactory.getActionDAOImpInstance().display());
         search.setIconifiedByDefault(false);
         search.setSubmitButtonEnabled(true);
 
         rv_search.setLayoutManager(new LinearLayoutManager(this));
         rv_search.setAdapter(newSearchAdapter);
         rv_search.addItemDecoration(new Decoration());
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace( R.id.fl_container, fragment );
+        transaction.commit();
+    }
+
+    private   void removeFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.remove( fragment );
+        transaction.commit();
     }
 }

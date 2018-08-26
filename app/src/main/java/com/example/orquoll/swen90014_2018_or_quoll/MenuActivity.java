@@ -42,6 +42,7 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         newFactory = new DAOFactory();
+        final MenuSuggestionAdapter newMenuSuggestionAdapter = new MenuSuggestionAdapter( this );
         btn_menu = (Button) findViewById(R.id.btn_menu);
         txt_setting = (TextView) findViewById(R.id.txt_setting);
         dlo_menu = (DrawerLayout) findViewById(R.id.dlo_menu) ;
@@ -51,7 +52,7 @@ public class MenuActivity extends AppCompatActivity {
         btn_search = (Button) findViewById(R.id.btn_search);
         rv_suggestion = (RecyclerView)findViewById(R.id.rv_suggestion);
         btn_test = (Button) findViewById( R.id.btn_test );
-        btn_test2 = (Button) findViewById( R.id.btn_test2 );
+
 
 
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +65,7 @@ public class MenuActivity extends AppCompatActivity {
         setListeners();
 
         rv_suggestion.setLayoutManager(new LinearLayoutManager(MenuActivity.this));
-        rv_suggestion.setAdapter(new MenuSuggestionAdapter(MenuActivity.this));
+        rv_suggestion.setAdapter(newMenuSuggestionAdapter);
         rv_suggestion.addItemDecoration(new Decoration());
 
 
@@ -77,20 +78,19 @@ public class MenuActivity extends AppCompatActivity {
                 Action action_2 = new Action("Mindful Thoughts Practise2","Lorem ipsum dolor sit amet",false);
                 Action action_3 = new Action("Mindful Thoughts Practise3","Lorem ipsum dolor sit amet",false);
                 Action action_4 = new Action("Mindful Thoughts Practise4","Lorem ipsum dolor sit amet",false);
+                Action action_5 = new Action( "Mindful Thoughts Practise5", "Lorem ipsum dolor sit amet", false );
                 newFactory.getActionDAOImpInstance().insert(action_1);
                 newFactory.getActionDAOImpInstance().insert(action_2);
                 newFactory.getActionDAOImpInstance().insert(action_3);
                 newFactory.getActionDAOImpInstance().insert(action_4);
+                newFactory.getActionDAOImpInstance().insert(action_5);
+                newMenuSuggestionAdapter.notifyDataSetChanged();
 
             }
         } );
 
-        btn_test2.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newFactory.getActionDAOImpInstance().display();
-            }
-        } );
+
+
 
     }
 

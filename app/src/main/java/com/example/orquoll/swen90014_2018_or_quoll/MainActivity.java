@@ -22,8 +22,7 @@ public class MainActivity extends AppCompatActivity {
         btn_Login = (Button) findViewById(R.id.btn_login);
 
         Connector.getDatabase();
-        Action action_5 = new Action("Mindful Thoughts Practise","Lorem ipsum dolor sit amet",false);
-        action_5.save();
+
 
         btn_Login.setOnClickListener(new View.OnClickListener() {
             @Override

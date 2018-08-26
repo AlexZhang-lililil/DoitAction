@@ -1,11 +1,13 @@
 package com.example.orquoll.swen90014_2018_or_quoll.db.DAO;
 
+import android.database.Cursor;
 import android.util.Log;
 
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 
 import org.litepal.LitePal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ActionDAOImp implements ActionDAO {
@@ -62,5 +64,30 @@ public class ActionDAOImp implements ActionDAO {
         return action;
     }
 
+    public Action[] searchAll(String name){
+        List<Action> actions = LitePal.where( "actionTittle = ?",name ).find( Action.class );
+        Action[] actions1 = new Action[actions.size()];
+        actions.toArray(actions1);
+        return  actions1;
+    }
 
+    public Action[] fuzzySearch(String keywords){
+        List<Action> actions = new ArrayList<Action>(  );
+        Cursor c = LitePal.findBySQL( "select * from Action where actionTittle like '%"+keywords+"%'" );
+
+        if(c.moveToFirst()){
+            do{
+                Action action = new Action();
+                action.setActionContent( c.getString( c.getColumnIndex( "actioncontent" )) );
+                action.setActionTittle( c.getString( c.getColumnIndex( "actiontittle" ) ) );
+                action.setId( c.getLong(c.getColumnIndex( "id" )) );
+                actions.add( action );
+            }while(c.moveToNext());
+        }
+
+        c.close();
+        Action[] actions1 = new Action[actions.size()];
+        actions.toArray(actions1);
+        return actions1;
+    }
 }
