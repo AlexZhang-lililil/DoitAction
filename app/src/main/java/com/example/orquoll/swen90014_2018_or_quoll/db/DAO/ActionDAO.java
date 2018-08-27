@@ -13,4 +13,8 @@ public interface ActionDAO {
 
     public Action searchById(Long actionId);
 
+    public Action[] searchAll(String s);
+
+    public Action[] fuzzySearch(String keyword);
+
 }

@@ -7,4 +7,5 @@ public interface SearchRecordDAO {
     public SearchRecord[] display();
     public void removeAll ();
 
+
 }

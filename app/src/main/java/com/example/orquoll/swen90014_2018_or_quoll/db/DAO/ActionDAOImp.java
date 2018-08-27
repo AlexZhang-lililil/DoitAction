@@ -64,6 +64,7 @@ public class ActionDAOImp implements ActionDAO {
         return action;
     }
 
+    @Override
     public Action[] searchAll(String name){
         List<Action> actions = LitePal.where( "actionTittle = ?",name ).find( Action.class );
         Action[] actions1 = new Action[actions.size()];
@@ -71,6 +72,7 @@ public class ActionDAOImp implements ActionDAO {
         return  actions1;
     }
 
+    @Override
     public Action[] fuzzySearch(String keywords){
         List<Action> actions = new ArrayList<Action>(  );
         Cursor c = LitePal.findBySQL( "select * from Action where actionTittle like '%"+keywords+"%'" );
