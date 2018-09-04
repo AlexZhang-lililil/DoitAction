@@ -20,6 +20,7 @@ import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
 
 import org.litepal.tablemanager.Connector;
+import org.w3c.dom.Text;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -31,10 +32,12 @@ public class MenuActivity extends AppCompatActivity {
     private TextView txt_history;
     private TextView txt_achievement;
     private TextView txt_setting;
+    private TextView txt_browse;
     private RecyclerView rv_suggestion;
     private Button btn_test;
     private Button btn_test2;
     private DAOFactory newFactory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class MenuActivity extends AppCompatActivity {
         txt_achievement = (TextView) findViewById(R.id.txt_achievements);
         txt_bookmark = (TextView) findViewById(R.id.txt_bookmarks);
         txt_history = (TextView) findViewById(R.id.txt_suggestion_history);
+        txt_browse = (TextView) findViewById(R.id.txt_browse);
         btn_search = (Button) findViewById(R.id.btn_search);
         rv_suggestion = (RecyclerView)findViewById(R.id.rv_suggestion);
         btn_test = (Button) findViewById( R.id.btn_test );
@@ -101,6 +105,7 @@ public class MenuActivity extends AppCompatActivity {
         txt_achievement.setOnClickListener(onclick);
         btn_search.setOnClickListener(onclick);
         txt_setting.setOnClickListener(onclick);
+        txt_browse.setOnClickListener(onclick);
     }
 
     private class Onclick implements View.OnClickListener{
@@ -125,6 +130,8 @@ public class MenuActivity extends AppCompatActivity {
                 case R.id.txt_setting:
                     intent = new Intent(MenuActivity.this,SettingActivity.class);
                     break;
+                case R.id.txt_browse:
+                    intent = new Intent(MenuActivity.this,BrowseActivity.class);
             }
             startActivity(intent);
         }

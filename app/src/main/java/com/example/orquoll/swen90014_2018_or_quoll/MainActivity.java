@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
+import com.example.orquoll.swen90014_2018_or_quoll.db.initializeData.StrengthData;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 
 import org.litepal.tablemanager.Connector;
@@ -23,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
         Connector.getDatabase();
 
+        DAOFactory newDAOFactory = new DAOFactory();
+        if(newDAOFactory.getStrengthDAOImp().display().length==0) {
+
+            StrengthData n = new StrengthData();
+            n.saveAll();
+
+        }
 
         btn_Login.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,4 +9,6 @@ public class DAOFactory {
     public SearchRecordDAOImp getSearchRecorDAOImp(){
         return new SearchRecordDAOImp();
     }
+
+    public StrengthDAOImp getStrengthDAOImp(){ return new StrengthDAOImp();}
 }
