@@ -119,7 +119,7 @@
             android:id="@+id/txt_browse"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Browse All Strength"
+            android:text="All Strength"
             android:textSize="25sp"
             android:textColor="@color/black"
             android:drawableLeft="@drawable/icon_browse"

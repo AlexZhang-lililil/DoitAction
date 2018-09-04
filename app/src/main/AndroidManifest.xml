@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.orquoll.swen90014_2018_or_quoll">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
@@ -24,7 +26,8 @@
         <activity android:name=".SuggestionHistoryActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".ActionActivity" />
-        <activity android:name=".BrowseActivity"></activity>
+        <activity android:name=".BrowseActivity" />
+        <activity android:name=".StrengthActivity"></activity>
     </application>
 
 </manifest>

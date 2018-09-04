@@ -1,8 +1,10 @@
 package com.example.orquoll.swen90014_2018_or_quoll.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.orquoll.swen90014_2018_or_quoll.R;
+import com.example.orquoll.swen90014_2018_or_quoll.StrengthActivity;
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Strength;
 
@@ -31,13 +34,13 @@ public class BrowseAdapter extends RecyclerView.Adapter<BrowseAdapter.LinearView
 
     class LinearViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tittle,content;
+        private TextView tittle,description;
         private ImageView strengthImage;
 
         public LinearViewHolder(View itemView){
             super(itemView);
             tittle = (TextView)itemView.findViewById(R.id.txt_strength_title);
-            content = (TextView)itemView.findViewById(R.id.txt_strength_description);
+            description = (TextView)itemView.findViewById(R.id.txt_strength_description);
             strengthImage = (ImageView)itemView.findViewById(R.id.img_strength);
         }
     }
@@ -50,12 +53,23 @@ public class BrowseAdapter extends RecyclerView.Adapter<BrowseAdapter.LinearView
     @Override
     public void onBindViewHolder(@NonNull BrowseAdapter.LinearViewHolder viewHolder, int i) {
         String tittle = allStrength[i].getStrength_Tittle();
-        String content = allStrength[i].getStrength_Content();
+        String description = allStrength[i].getStrength_description();
         int drawableId = allStrength[i].getDrawableId();
-        long id = allStrength[i].getId();
+        final long id = allStrength[i].getId();
         viewHolder.tittle.setText(tittle);
-        viewHolder.content.setText(content);
+        viewHolder.description.setText(description);
         viewHolder.strengthImage.setImageDrawable(newDrawable(drawableId));
+        viewHolder.itemView.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle(  );
+                bundle.putLong( "strength_Id",id );
+                intent.putExtras( bundle );
+                intent.setClass( mContext, StrengthActivity.class );
+                mContext.startActivity( intent );
+            }
+        } );
     }
 
     @Override
