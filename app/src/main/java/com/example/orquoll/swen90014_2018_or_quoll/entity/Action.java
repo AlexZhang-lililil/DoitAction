@@ -3,24 +3,49 @@ package com.example.orquoll.swen90014_2018_or_quoll.entity;
 import org.litepal.crud.LitePalSupport;
 
 public class Action extends LitePalSupport {
-    private String actionTittle;
+    private String actionTitle;
     private String actionContent;
     private boolean actionMarked;
+    private String actionDes;
+    private long actionId;
     private long id;
 
     public Action(String actionTittle, String actionContent, boolean actionMarked) {
-        this.actionTittle = actionTittle;
+        this.actionTitle = actionTittle;
         this.actionContent = actionContent;
         this.actionMarked = actionMarked;
     }
 
     public Action(String actionTittle, String actionContent) {
-        this.actionTittle = actionTittle;
+        this.actionTitle = actionTittle;
         this.actionContent = actionContent;
     }
 
     public Action(){
 
+    }
+
+    public Action(long actionId,String action_Title,String action_Des,String action_Content){
+        this.id=actionId;
+        this.actionTitle = action_Title;
+        this.actionDes = action_Des;
+        this.actionContent = action_Content;
+    }
+
+    public String getActionDes() {
+        return actionDes;
+    }
+
+    public void setActionDes(String actionDes) {
+        this.actionDes = actionDes;
+    }
+
+    public long getActionId() {
+        return actionId;
+    }
+
+    public void setActionId(long actionId) {
+        this.actionId = actionId;
     }
 
     public void setId(long id) {
@@ -31,11 +56,11 @@ public class Action extends LitePalSupport {
         return id;
     }
     public String getActionTittle() {
-        return actionTittle;
+        return actionTitle;
     }
 
     public void setActionTittle(String actionTittle) {
-        this.actionTittle = actionTittle;
+        this.actionTitle = actionTittle;
     }
 
     public String getActionContent() {
