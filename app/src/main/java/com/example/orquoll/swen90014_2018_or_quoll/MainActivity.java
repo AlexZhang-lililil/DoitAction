@@ -6,9 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.ActionDAO;
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
+import com.example.orquoll.swen90014_2018_or_quoll.db.initializeData.ActionData;
 import com.example.orquoll.swen90014_2018_or_quoll.db.initializeData.StrengthData;
+import com.example.orquoll.swen90014_2018_or_quoll.db.initializeData.Strength_ActionData;
+import com.example.orquoll.swen90014_2018_or_quoll.db.initializeData.TagData;
+import com.example.orquoll.swen90014_2018_or_quoll.db.initializeData.Tag_ActionData;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
+import com.example.orquoll.swen90014_2018_or_quoll.entity.Strength_Action;
 
 import org.litepal.tablemanager.Connector;
 
@@ -28,8 +34,16 @@ public class MainActivity extends AppCompatActivity {
         DAOFactory newDAOFactory = new DAOFactory();
         if(newDAOFactory.getStrengthDAOImp().display().length==0) {
 
-            StrengthData n = new StrengthData();
-            n.saveAll();
+            StrengthData strengthData = new StrengthData();
+            Strength_ActionData strength_actionData = new Strength_ActionData();
+            Tag_ActionData tag_actionData = new Tag_ActionData();
+            TagData tagData = new TagData();
+            ActionData actionData = new ActionData();
+            strengthData.saveAll();
+            strength_actionData.saveAll();
+            tag_actionData.saveAll();
+            tagData.saveAll();
+            actionData.saveAll();
 
         }
 

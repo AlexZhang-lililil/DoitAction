@@ -14,12 +14,13 @@
             android:text="this is the aciton's tittle"
             android:textSize="18sp"
             android:id="@+id/aciton_tittle"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <WebView
+            android:layout_width="260dp"
+            android:layout_height="70dp"
             android:text="This is the cotent...."
-            android:textSize="15sp"
-            android:id="@+id/aciton_content"/>
+            android:textSize="10sp"
+            android:id="@+id/aciton_content"
+            android:clickable="true"/>
     </LinearLayout>
     <ImageView
         android:layout_width="match_parent"

@@ -4,18 +4,22 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
+import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 
 public class ActionActivity extends AppCompatActivity {
 
     private Button btn_back;
-    private TextView txt_content;
+    private WebView txt_content;
     private TextView txt_tittle;
     private Long actionId;
     private Button btn_bookmark;
+    private DAOFactory newDAOFactory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +28,10 @@ public class ActionActivity extends AppCompatActivity {
 
         final DAOFactory newFactory = new DAOFactory();
         btn_back = (Button)findViewById( R.id.btn_back_action );
-        txt_content = (TextView)findViewById( R.id.txt_action_content );
+        txt_content = (WebView)findViewById( R.id.txt_action_content );
         txt_tittle = (TextView)findViewById( R.id.txt_action_tittle );
         btn_bookmark = (Button)findViewById(R.id.btn_mark);
+        newDAOFactory = new DAOFactory();
 
         btn_back.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -36,11 +41,18 @@ public class ActionActivity extends AppCompatActivity {
         } );
 
         Bundle actionBundle = getIntent().getExtras();
-        txt_tittle.setText(actionBundle.getString("Tittle"));
-        txt_content.setText( actionBundle.getString("Content"));
+
         actionId = actionBundle.getLong("Id");
 
         setMarkState(actionId);
+
+        Action thisAction = newDAOFactory.getActionDAOImpInstance().searchById( actionId );
+        txt_content.setWebViewClient( new WebViewClient() );
+        txt_content.getSettings().setJavaScriptEnabled( true );
+        txt_content.loadData( thisAction.getActionContent(),"text/html","UTF-8" );
+        txt_tittle.setText( thisAction.getActionTittle() );
+
+
 
         btn_bookmark.setOnClickListener(new View.OnClickListener() {
             @Override

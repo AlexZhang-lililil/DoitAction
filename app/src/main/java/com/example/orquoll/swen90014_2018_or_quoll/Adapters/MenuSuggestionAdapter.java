@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,18 +43,20 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
         Action[] actions = new Action[newDAOFactory.getActionDAOImpInstance().display().length];
         actions = newDAOFactory.getActionDAOImpInstance().display();
         final String tittle = actions[i].getActionTittle();
-        final String content = actions[i].getActionContent();
+        final String des = actions[i].getActionDes();
         final Long id = actions[i].getId();
         viewHolder.action_tittle.setText(tittle);
-        viewHolder.action_content.setText(content);
+        viewHolder.action_des.loadData( des,"text/html","UTF-8" );
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass( mContext,ActionActivity.class );
                 Bundle actionBundle = new Bundle();
+                /* drop
                 actionBundle.putString("Tittle",tittle);
-                actionBundle.putString("Content",content);
+                actionBundle.putString("Content",);
+                */
                 actionBundle.putLong("Id",id);
                 intent.putExtras( actionBundle );
                 mContext.startActivity(intent);
@@ -68,14 +73,18 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
 
     class LinearViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView action_tittle,action_content;
+        private TextView action_tittle;
+        private WebView action_des;
         private ImageView action_image;
 
         public LinearViewHolder(@NonNull View itemView) {
             super(itemView);
-            action_content = (TextView)itemView.findViewById(R.id.aciton_content);
+            action_des = (WebView)itemView.findViewById(R.id.aciton_content);
             action_tittle = (TextView)itemView.findViewById(R.id.aciton_tittle);
             action_image = (ImageView) itemView.findViewById(R.id.action_images);
+
+            action_des.setWebViewClient( new WebViewClient() );
+            action_des.getSettings().setJavaScriptEnabled( true );
         }
     }
 }

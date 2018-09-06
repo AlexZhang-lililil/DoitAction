@@ -52,7 +52,7 @@ public class BrowseAdapter extends RecyclerView.Adapter<BrowseAdapter.LinearView
 
     @Override
     public void onBindViewHolder(@NonNull BrowseAdapter.LinearViewHolder viewHolder, int i) {
-        String tittle = allStrength[i].getStrength_Tittle();
+        String tittle = allStrength[i].getStrength_Title();
         String description = allStrength[i].getStrength_description();
         int drawableId = allStrength[i].getDrawableId();
         final long id = allStrength[i].getId();

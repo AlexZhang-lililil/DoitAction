@@ -54,7 +54,7 @@
             android:textAlignment="center"
             android:id="@+id/txt_action_tittle"
             android:layout_marginTop="10dp"/>
-        <TextView
+        <WebView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="this is content"

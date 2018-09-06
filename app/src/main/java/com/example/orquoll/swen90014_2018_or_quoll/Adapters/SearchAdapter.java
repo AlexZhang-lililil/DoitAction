@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,12 +35,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.LinearView
     }
 
     class LinearViewHolder extends RecyclerView.ViewHolder{
-        private TextView action_tittle,action_content;
+        private TextView action_tittle;
+        private WebView action_des;
         private ImageView action_image;
 
         public LinearViewHolder(@NonNull View itemView) {
             super(itemView);
-            action_content = (TextView)itemView.findViewById(R.id.aciton_content);
+            action_des = (WebView)itemView.findViewById(R.id.aciton_content);
             action_tittle = (TextView)itemView.findViewById(R.id.aciton_tittle);
             action_image = (ImageView) itemView.findViewById(R.id.action_images);
         }
@@ -54,10 +57,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.LinearView
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.LinearViewHolder viewHolder, int i) {
             final String tittle = searchActions[i].getActionTittle();
-            final String content = searchActions[i].getActionContent();
+            final String des = searchActions[i].getActionDes();
             final Long id = searchActions[i].getId();
-            viewHolder.action_content.setText( content );
             viewHolder.action_tittle.setText( tittle );
+
+            viewHolder.action_des.getSettings().setJavaScriptEnabled( true );
+            viewHolder.action_des.setWebViewClient( new WebViewClient() );
+            viewHolder.action_des.loadData( des,"text/html","UTF-8" );
 
             viewHolder.itemView.setOnClickListener( new View.OnClickListener() {
                 @Override
@@ -65,8 +71,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.LinearView
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle(  );
                     bundle.putLong( "Id",id );
-                    bundle.putString("Tittle",tittle  );
-                    bundle.putString("Content",content);
                     intent.putExtras(bundle);
                     intent.setClass( mContext, ActionActivity.class );
                     mContext.startActivity( intent );

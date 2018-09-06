@@ -16,6 +16,21 @@ public class TagData {
     }
 
     public void saveAll(){
-        
+        saveTag("Apathy");
+        saveTag("Depression");
+        saveTag("Panic");
+        saveTag("Worrying");
+        saveTag("Social life");
+        saveTag("Social anxiety");
+        saveTag("Managing work and study");
+        saveTag("Finding a job");
+        saveTag("Problem solving");
+        saveTag("Self-care");
+        saveTag("Feeling positive");
+        saveTag("Learning more about psychosis");
+        saveTag("Stories like yours");
+        saveTag("Strengths");
+        saveTag("Changing a habit");
+
     }
 }
