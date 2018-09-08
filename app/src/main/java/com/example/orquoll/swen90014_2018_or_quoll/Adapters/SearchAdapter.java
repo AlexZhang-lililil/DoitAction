@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.LinearView
             viewHolder.action_des.setWebViewClient( new WebViewClient() );
             viewHolder.action_des.loadData( des,"text/html","UTF-8" );
 
+            Log.d("ttt",searchActions[i].getActionTittle());
             viewHolder.itemView.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

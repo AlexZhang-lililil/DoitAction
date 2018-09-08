@@ -80,6 +80,7 @@ public class ActionDAOImp implements ActionDAO {
         if(c.moveToFirst()){
             do{
                 Action action = new Action();
+                action.setActionDes( c.getString( c.getColumnIndex( "actiondes" ) ) );
                 action.setActionContent( c.getString( c.getColumnIndex( "actioncontent" )) );
                 action.setActionTittle( c.getString( c.getColumnIndex( "actiontitle" ) ) );
                 action.setId( c.getLong(c.getColumnIndex( "id" )) );
@@ -91,5 +92,21 @@ public class ActionDAOImp implements ActionDAO {
         Action[] actions1 = new Action[actions.size()];
         actions.toArray(actions1);
         return actions1;
+    }
+
+    public Action[] showDoneAction(){
+        List<Action> actions  = LitePal.where("actionDone = ?","1").find(Action.class);
+        Action[] action = new Action[actions.size()];
+        actions.toArray(action);
+        return action;
+    }
+
+    public void doAction(Long actionId){
+        Action actionDone = new Action();
+        actionDone = searchById(actionId);
+        if(!actionDone.isActionDone()){
+            actionDone.setActionDone(true);
+            actionDone.update(Long.valueOf(actionId));
+        }
     }
 }

@@ -73,6 +73,7 @@ public class MenuActivity extends AppCompatActivity {
         rv_suggestion.addItemDecoration(new Decoration());
 
 
+        /*
         //test
         btn_test.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -92,6 +93,7 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         } );
+        */
 
 
 

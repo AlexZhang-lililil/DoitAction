@@ -63,6 +63,16 @@
             android:id="@+id/txt_action_content"
             android:layout_marginTop="20dp"/>
 
+        <Button
+            android:id="@+id/btn_did_it"
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:text="Did It!"
+            android:textSize="20sp"
+            android:textColor="@color/transparent"
+            android:background="@drawable/button_press"
+            android:layout_marginTop="15dp"/>
 
     </LinearLayout>
     </ScrollView>

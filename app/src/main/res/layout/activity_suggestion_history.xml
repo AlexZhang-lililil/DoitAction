@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,10 +21,42 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Suggstion History"
+            android:text="Do-it History"
             android:textSize="25sp"
             android:textColor="@color/transparent"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="80dp"
             />
     </Toolbar>
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/lightGray"
+            android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="You have completed 20 Do-Its!"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:id="@+id/txt_completeDoits"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="You have showen 20 strengths!"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:id="@+id/txt_shownStrength"/>
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rv_doit_history"/>
+    </LinearLayout>
+</LinearLayout>

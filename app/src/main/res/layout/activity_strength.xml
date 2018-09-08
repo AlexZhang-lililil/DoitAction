@@ -25,6 +25,7 @@
             android:textSize="25sp"
             android:textColor="@color/transparent"
             android:layout_marginLeft="80dp"
+            android:id="@+id/tb_strength_title"
             />
     </Toolbar>
 
@@ -38,5 +39,6 @@
         android:layout_height="60dp"
         android:text="Start"
         android:textSize="20sp"
+        android:id="@+id/my_Strength"
         android:layout_gravity="center"/>
 </LinearLayout>

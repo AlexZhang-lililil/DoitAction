@@ -7,6 +7,7 @@ public class Action extends LitePalSupport {
     private String actionContent;
     private boolean actionMarked;
     private String actionDes;
+    private boolean actionDone;
     private long actionId;
     private long id;
 
@@ -77,5 +78,13 @@ public class Action extends LitePalSupport {
 
     public void setActionMarked(boolean actionMarked) {
         this.actionMarked = actionMarked;
+    }
+
+    public boolean isActionDone() {
+        return actionDone;
+    }
+
+    public void setActionDone(boolean actionDone) {
+        this.actionDone = actionDone;
     }
 }

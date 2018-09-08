@@ -1,6 +1,9 @@
 package com.example.orquoll.swen90014_2018_or_quoll;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
@@ -20,6 +24,7 @@ public class ActionActivity extends AppCompatActivity {
     private Long actionId;
     private Button btn_bookmark;
     private DAOFactory newDAOFactory;
+    private Button btn_did_it;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +36,21 @@ public class ActionActivity extends AppCompatActivity {
         txt_content = (WebView)findViewById( R.id.txt_action_content );
         txt_tittle = (TextView)findViewById( R.id.txt_action_tittle );
         btn_bookmark = (Button)findViewById(R.id.btn_mark);
+        btn_did_it = (Button) findViewById( R.id.btn_did_it );
         newDAOFactory = new DAOFactory();
 
         btn_back.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        } );
+        btn_did_it.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newFactory.getActionDAOImpInstance().doAction( actionId );
+                feedback();
+
             }
         } );
 
@@ -73,6 +87,31 @@ public class ActionActivity extends AppCompatActivity {
         }else {
             btn_bookmark.setBackground(getResources().getDrawable(R.drawable.icon_bookmark2));
         }
+    }
+
+    private void feedback(){
+        final String[] feedbacks = {"Really Helpful!","Alright~","Useless","Really Bad!"};
+        AlertDialog.Builder newAlert = new AlertDialog.Builder( this );
+        newAlert.setTitle( "After doing it,I think this action is ..." );
+        newAlert.setSingleChoiceItems( feedbacks, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        } );
+        newAlert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText( ActionActivity.this,"You have earned 5 marks for doing it!",Toast.LENGTH_LONG ).show();
+            }
+        } );
+        newAlert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        } );
+        newAlert.show();
     }
 }
 
