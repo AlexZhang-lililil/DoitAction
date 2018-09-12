@@ -1,5 +1,7 @@
 package com.example.orquoll.swen90014_2018_or_quoll.db.initializeData;
 
+import android.util.Log;
+
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 

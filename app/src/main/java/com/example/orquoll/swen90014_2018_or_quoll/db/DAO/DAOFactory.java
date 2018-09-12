@@ -11,4 +11,6 @@ public class DAOFactory {
     }
 
     public StrengthDAOImp getStrengthDAOImp(){ return new StrengthDAOImp();}
+
+    public S_ADAOImp getS_ADAOImp(){return new S_ADAOImp();}
 }

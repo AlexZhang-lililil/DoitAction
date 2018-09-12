@@ -27,7 +27,7 @@ public class Action extends LitePalSupport {
     }
 
     public Action(long actionId,String action_Title,String action_Des,String action_Content){
-        this.id=actionId;
+        this.actionId=actionId;
         this.actionTitle = action_Title;
         this.actionDes = action_Des;
         this.actionContent = action_Content;
