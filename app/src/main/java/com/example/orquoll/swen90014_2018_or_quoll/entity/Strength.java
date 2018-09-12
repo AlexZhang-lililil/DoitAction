@@ -7,6 +7,7 @@ public class Strength extends LitePalSupport{
     private String strength_Content;
     private String strength_description;
     private int drawableId;
+    private int points;
     private long id;
 
     public Strength(String strength_Title, String strength_Content,String description, int drawableId) {
