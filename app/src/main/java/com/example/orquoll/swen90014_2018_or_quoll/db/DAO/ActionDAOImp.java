@@ -39,6 +39,12 @@ public class ActionDAOImp implements ActionDAO {
 
         return action.get(0);
     }
+
+    public Action searchByActionId(Long id){
+        List<Action> action = LitePal.where("actionId = ?",id.toString()).find(Action.class);
+        return action.get(0);
+    }
+
     @Override
     public void markAction (Long actionId){
 
@@ -109,4 +115,13 @@ public class ActionDAOImp implements ActionDAO {
             actionDone.update(Long.valueOf(actionId));
         }
     }
+
+    public Action[] showActionByIds(Long[] actions_Id){
+        Action[] actions = new Action[actions_Id.length];
+        for(int i=0;i<actions.length;i++){
+            actions[i] = searchByActionId(actions_Id[i]);
+        }
+        return actions;
+    }
+
 }

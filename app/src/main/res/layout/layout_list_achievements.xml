@@ -30,9 +30,9 @@
         <ProgressBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:progressDrawable="@drawable/progress_bar"
             android:progress="30"
             android:max="100"
+            android:progressDrawable="@drawable/progress_bar"
             android:id="@+id/achievement_progressbar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
     </LinearLayout>

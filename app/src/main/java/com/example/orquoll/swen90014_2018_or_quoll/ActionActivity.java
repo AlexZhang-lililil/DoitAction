@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,7 +22,8 @@ public class ActionActivity extends AppCompatActivity {
     private Button btn_back;
     private WebView txt_content;
     private TextView txt_tittle;
-    private Long actionId;
+    private Long id;
+    private Long action_Id;
     private Button btn_bookmark;
     private DAOFactory newDAOFactory;
     private Button btn_did_it;
@@ -48,7 +50,12 @@ public class ActionActivity extends AppCompatActivity {
         btn_did_it.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newFactory.getActionDAOImpInstance().doAction( actionId );
+                newFactory.getActionDAOImpInstance().doAction( id );
+                action_Id = newFactory.getActionDAOImpInstance().searchById(id).getActionId();
+                for(int i=0;i<newFactory.getS_ADAOImp().getSIdByAId(action_Id).length;i++){
+                    newFactory.getStrengthDAOImp().addPoints(newFactory.getS_ADAOImp().getSIdByAId(action_Id)[i]);
+                }
+
                 feedback();
 
             }
@@ -56,11 +63,11 @@ public class ActionActivity extends AppCompatActivity {
 
         Bundle actionBundle = getIntent().getExtras();
 
-        actionId = actionBundle.getLong("Id");
+        id = actionBundle.getLong("Id");
 
-        setMarkState(actionId);
+        setMarkState(id);
 
-        Action thisAction = newDAOFactory.getActionDAOImpInstance().searchById( actionId );
+        Action thisAction = newDAOFactory.getActionDAOImpInstance().searchById( id );
         txt_content.setWebViewClient( new WebViewClient() );
         txt_content.getSettings().setJavaScriptEnabled( true );
         txt_content.loadData( thisAction.getActionContent(),"text/html","UTF-8" );
@@ -71,8 +78,8 @@ public class ActionActivity extends AppCompatActivity {
         btn_bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newFactory.getActionDAOImpInstance().markAction(actionId);
-                setMarkState(actionId);
+                newFactory.getActionDAOImpInstance().markAction(id);
+                setMarkState(id);
             }
         });
 

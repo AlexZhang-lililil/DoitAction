@@ -10,8 +10,8 @@ public class Strength_ActionData {
         this.newDAOFactory = new DAOFactory() ;
     }
 
-    public void saveStrength_Action(long strength_Id,long action_id){
-        Strength_Action strength_action = new Strength_Action(strength_Id,action_id);
+    public void saveStrength_Action(long action_id,long strength_id){
+        Strength_Action strength_action = new Strength_Action(action_id,strength_id);
         strength_action.save();
     }
 

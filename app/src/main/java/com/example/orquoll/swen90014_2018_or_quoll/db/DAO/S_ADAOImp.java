@@ -2,6 +2,7 @@ package com.example.orquoll.swen90014_2018_or_quoll.db.DAO;
 
 import android.util.Log;
 
+import com.example.orquoll.swen90014_2018_or_quoll.StrengthActivity;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Strength;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Strength_Action;
@@ -13,21 +14,6 @@ import java.util.List;
 
 public class S_ADAOImp {
 
-    /*    public int getActionsStrength(Action[] actions){
-            List<Strength> strengths;
-            List<Strength> allStrength = new ArrayList<Strength>(  );
-            for(int i=0;i<actions.length;i++){
-                strengths = LitePal.where("actionTitle",actions[i].getActionTittle()).find(Strength.class);
-                for(int m=0;m<strengths.size();i++){
-                    for(int n=0;n<allStrength.size();n++){
-
-                    }
-                }
-            }
-
-            return 0;
-        }
-        */
     public int getActionsStrength(Action[] actions) {
 
         List<Strength_Action> allStrength = new ArrayList<Strength_Action>();
@@ -49,5 +35,23 @@ public class S_ADAOImp {
             }
         }
         return allStrength.size();
+    }
+
+    public Long[] getSIdByAId(Long actionId){
+        List<Strength_Action> list = LitePal.where("action_Id = ?",actionId.toString()).find(Strength_Action.class);
+        Long[] strengthId = new Long[list.size()];
+        for(int i =0;i<strengthId.length;i++){
+            strengthId[i] = list.get(i).getStrength_Id();
+        }
+        return strengthId;
+    }
+
+    public Long[] getAIdBySId(Long strengthId){
+        List<Strength_Action> list = LitePal.where("strength_Id = ?",strengthId.toString()).find(Strength_Action.class);
+        Long[] actionId = new Long[list.size()];
+        for(int i=0;i<actionId.length;i++){
+            actionId[i] =list.get(i).getAction_Id();
+        }
+        return actionId;
     }
 }

@@ -10,11 +10,25 @@ public class Strength extends LitePalSupport{
     private int points;
     private long id;
 
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+
     public Strength(String strength_Title, String strength_Content,String description, int drawableId) {
         this.strength_Title = strength_Title;
         this.strength_Content = strength_Content;
         this.drawableId = drawableId;
         this.strength_description = description;
+    }
+
+    public Strength(){
+
     }
 
     public String getStrength_description() {

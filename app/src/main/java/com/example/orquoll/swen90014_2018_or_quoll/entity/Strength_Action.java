@@ -7,7 +7,7 @@ public class Strength_Action extends LitePalSupport{
     long strength_Id;
     long action_Id;
 
-    public Strength_Action(long strength_Id, long action_Id) {
+    public Strength_Action(long action_Id, long strength_Id) {
         this.strength_Id = strength_Id;
         this.action_Id = action_Id;
     }

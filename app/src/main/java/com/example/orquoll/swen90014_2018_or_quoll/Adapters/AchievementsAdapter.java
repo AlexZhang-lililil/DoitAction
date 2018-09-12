@@ -1,6 +1,8 @@
 package com.example.orquoll.swen90014_2018_or_quoll.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,15 +12,22 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.orquoll.swen90014_2018_or_quoll.MyStrengthActivity;
 import com.example.orquoll.swen90014_2018_or_quoll.R;
+import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
+import com.example.orquoll.swen90014_2018_or_quoll.entity.Strength;
 
 import java.util.zip.Inflater;
 
 public class AchievementsAdapter extends RecyclerView.Adapter <AchievementsAdapter.LinearViewHolder> {
     private Context mContext;
+    private DAOFactory newDAOFactory;
+    private Strength[] strengths;
 
     public AchievementsAdapter (Context context){
         this.mContext = context;
+        this.newDAOFactory = new DAOFactory();
+        this.strengths = newDAOFactory.getStrengthDAOImp().display();
     }
 
     class LinearViewHolder extends RecyclerView.ViewHolder{
@@ -43,12 +52,30 @@ public class AchievementsAdapter extends RecyclerView.Adapter <AchievementsAdapt
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
+    public void onBindViewHolder(@NonNull AchievementsAdapter.LinearViewHolder viewHolder, int i) {
+        int level = strengths[i].getPoints()/50;
+        viewHolder.achieveImg.setImageResource(strengths[i].getDrawableId());
+        viewHolder.achieveTitle.setText(strengths[i].getStrength_Title());
+        viewHolder.lvl.setText("Current Level :"+ level );
+        viewHolder.achievementProgress.setMax(50);
+        viewHolder.achievementProgress.setProgress(strengths[i].getPoints()-level*50);
+        final Long idInBundle =strengths[i].getId();
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("StrengthId",idInBundle);
+                Intent intent = new Intent ();
+                intent.putExtras(bundle);
+                intent.setClass(mContext, MyStrengthActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+
+        return strengths.length;
     }
 }

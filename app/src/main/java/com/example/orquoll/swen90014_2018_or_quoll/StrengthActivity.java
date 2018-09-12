@@ -1,5 +1,6 @@
 package com.example.orquoll.swen90014_2018_or_quoll;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,10 +42,21 @@ public class StrengthActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         DAOFactory newDAOFactory = new DAOFactory();
 
-        Strength thisStrength = newDAOFactory.getStrengthDAOImp().getStrengthById( bundle.getLong( "strength_Id" ) );
+        final Strength thisStrength = newDAOFactory.getStrengthDAOImp().getStrengthById( bundle.getLong( "strength_Id" ) );
 
         tb_strength_title.setText( thisStrength.getStrength_Title() );
         btn_my_strength.setText( "My "+ thisStrength.getStrength_Title() );
+        btn_my_strength.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putLong("StrengthId",thisStrength.getId());
+                Intent intent = new Intent ();
+                intent.putExtras(bundle);
+                intent.setClass(StrengthActivity.this,MyStrengthActivity.class);
+                startActivity(intent);
+            }
+        });
 
         wv_strength.getSettings().setJavaScriptEnabled( true );
         wv_strength.setWebViewClient( new WebViewClient() );
