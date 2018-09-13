@@ -53,6 +53,8 @@ public class AchievementsAdapter extends RecyclerView.Adapter <AchievementsAdapt
 
     @Override
     public void onBindViewHolder(@NonNull AchievementsAdapter.LinearViewHolder viewHolder, int i) {
+        this.strengths = newDAOFactory.getStrengthDAOImp().display();
+
         int level = strengths[i].getPoints()/50;
         viewHolder.achieveImg.setImageResource(strengths[i].getDrawableId());
         viewHolder.achieveTitle.setText(strengths[i].getStrength_Title());
