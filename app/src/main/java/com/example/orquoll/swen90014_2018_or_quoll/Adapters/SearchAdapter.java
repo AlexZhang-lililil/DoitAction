@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,10 +25,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.LinearView
     private Context mContext;
     private DAOFactory newDAOFactory;
     private Action[] searchActions;
+    private Action[] filteredActions;
 
     public SearchAdapter (Context context,Action[] searchActions){
         this.mContext = context;
         this.searchActions = searchActions;
+        this.newDAOFactory = new DAOFactory();
 
     }
 
@@ -51,7 +54,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.LinearView
     @NonNull
     @Override
     public SearchAdapter.LinearViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        this.newDAOFactory = new DAOFactory();
         return new SearchAdapter.LinearViewHolder(LayoutInflater.from(mContext).inflate(R.layout.layout_list_suggestion,viewGroup,false));
     }
 
@@ -66,7 +68,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.LinearView
             viewHolder.action_des.setWebViewClient( new WebViewClient() );
             viewHolder.action_des.loadData( des,"text/html","UTF-8" );
 
-            Log.d("ttt",searchActions[i].getActionTittle());
             viewHolder.itemView.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -84,5 +85,28 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.LinearView
     @Override
     public int getItemCount() {
         return searchActions.length;
+    }
+
+    public Filter getFilter(){
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                if(charSequence.toString().isEmpty())
+                {
+                    filteredActions = searchActions;
+                }else{
+
+                }
+                FilterResults results = new FilterResults();
+                results.values = filteredActions;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                filteredActions = (Action[]) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 }
