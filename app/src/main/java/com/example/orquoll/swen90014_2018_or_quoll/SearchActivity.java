@@ -191,7 +191,6 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 tagId = newDAOFactory.getTagDAOImp().getTagsByParentId( parentTagId ).get( i ).getTag_id();
-                Log.d("actionid",newDAOFactory.getT_ADAOImp().getActionIdByTagId( tagId )[0].toString());
                 newSearchAdapter.setSearchActions( newDAOFactory.getActionDAOImpInstance().showActionByIds( newDAOFactory.getT_ADAOImp().getActionIdByTagId( tagId ) ));
                 newSearchAdapter.notifyDataSetChanged();
             }
