@@ -13,6 +13,7 @@ public class MyAchievementActivity extends AppCompatActivity {
 
     private Button btn_back;
     private RecyclerView rv_achievement;
+    private AchievementsAdapter newAchievementsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class MyAchievementActivity extends AppCompatActivity {
 
         btn_back = (Button) findViewById(R.id.btn_back_achievement);
         rv_achievement = (RecyclerView) findViewById(R.id.rv_achievement);
+        newAchievementsAdapter = new AchievementsAdapter(this);
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +32,13 @@ public class MyAchievementActivity extends AppCompatActivity {
         });
 
         rv_achievement.setLayoutManager(new LinearLayoutManager(this));
-        rv_achievement.setAdapter(new AchievementsAdapter(this));
+        rv_achievement.setAdapter(newAchievementsAdapter);
 
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
+        newAchievementsAdapter.notifyDataSetChanged();
     }
 }
