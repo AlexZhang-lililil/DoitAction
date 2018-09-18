@@ -44,6 +44,7 @@ public class SearchActivity extends AppCompatActivity {
     private long tagId;
     private ArrayAdapter adapterForTag;
     private List<String> tagWords;
+    private String searchKeywords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class SearchActivity extends AppCompatActivity {
         rv_search = (RecyclerView) findViewById(R.id.rv_search);
         sp_ParentTag = (Spinner) findViewById( R.id.spinner_parent_tag );
         sp_Tag = (Spinner) findViewById( R.id.spinner_tag );
+        searchKeywords = "";
 
 
         initialize();
@@ -88,8 +90,14 @@ public class SearchActivity extends AppCompatActivity {
 
                     //dynamically display search results
 
-                    newSearchAdapter.setSearchActions( newDAOFactory.getActionDAOImpInstance().fuzzySearch( s ) );
-                    newSearchAdapter.notifyDataSetChanged();
+                    if(tagId!=26) {
+                        newSearchAdapter.setSearchActions(newDAOFactory.getActionDAOImpInstance().combineSearch(s, newDAOFactory.getT_ADAOImp().getActionIdByTagId(tagId)));
+                        newSearchAdapter.notifyDataSetChanged();
+                    }else{
+                        newSearchAdapter.setSearchActions(newDAOFactory.getActionDAOImpInstance().fuzzySearch(s));
+                        newSearchAdapter.notifyDataSetChanged();
+                    }
+                    searchKeywords = s;
 
                 }else{
 
@@ -98,8 +106,14 @@ public class SearchActivity extends AppCompatActivity {
                     else
                         removeFragment( historyFragment );
 
-                    newSearchAdapter.setSearchActions( newDAOFactory.getActionDAOImpInstance().display() );
-                    newSearchAdapter.notifyDataSetChanged();
+                    if(tagId!=26) {
+                        newSearchAdapter.setSearchActions(newDAOFactory.getActionDAOImpInstance().combineSearch(s, newDAOFactory.getT_ADAOImp().getActionIdByTagId(tagId)));
+                        newSearchAdapter.notifyDataSetChanged();
+                    }else{
+                        newSearchAdapter.setSearchActions(newDAOFactory.getActionDAOImpInstance().fuzzySearch(s));
+                        newSearchAdapter.notifyDataSetChanged();
+                    }
+                    searchKeywords = s;
                 }
                 return false;
             }
@@ -191,8 +205,13 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 tagId = newDAOFactory.getTagDAOImp().getTagsByParentId( parentTagId ).get( i ).getTag_id();
-                newSearchAdapter.setSearchActions( newDAOFactory.getActionDAOImpInstance().showActionByIds( newDAOFactory.getT_ADAOImp().getActionIdByTagId( tagId ) ));
-                newSearchAdapter.notifyDataSetChanged();
+                if(tagId != 26) {
+                    newSearchAdapter.setSearchActions(newDAOFactory.getActionDAOImpInstance().combineSearch(searchKeywords, newDAOFactory.getT_ADAOImp().getActionIdByTagId(tagId)));
+                    newSearchAdapter.notifyDataSetChanged();
+                }else{
+                    newSearchAdapter.setSearchActions(newDAOFactory.getActionDAOImpInstance().fuzzySearch(searchKeywords));
+                    newSearchAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override

@@ -39,5 +39,7 @@ public class TagData {
         saveTag("Stories like yours",8,22);
         saveTag("Strengths",6,23);
         saveTag("Changing a habit",9,24);
+        saveTag("No filters",0,25);
+        saveTag("No filters",25,26);
     }
 }
