@@ -45,13 +45,16 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayAdapter adapterForTag;
     private List<String> tagWords;
     private String searchKeywords;
+    private Button searchHistory;
+    private boolean showHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        this.parentTagId = 1;
+        this.showHistory = false;
+        this.parentTagId = 25;
         newDAOFactory = new DAOFactory();
         tagWords = getTags();
         adapterForTag = new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,tagWords){};
@@ -62,32 +65,36 @@ public class SearchActivity extends AppCompatActivity {
         rv_search = (RecyclerView) findViewById(R.id.rv_search);
         sp_ParentTag = (Spinner) findViewById( R.id.spinner_parent_tag );
         sp_Tag = (Spinner) findViewById( R.id.spinner_tag );
+        searchHistory = (Button) findViewById(R.id.btn_search_history);
         searchKeywords = "";
 
 
         initialize();
 
-        //getSupportFragmentManager().beginTransaction().add( R.id.fl_container,historyFragment ).commit();
+        searchHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(showHistory){
+                    removeFragment(historyFragment);
+                    showHistory = !showHistory;
+                }else{
+                    replaceFragment(historyFragment);
+                    showHistory = !showHistory;
+                }
+            }
+        });
 
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
 
                 newDAOFactory.getSearchRecorDAOImp().insertNewRecord( s );
-                removeFragment( historyFragment );
-
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
                 if(!TextUtils.isEmpty(s.trim())){
-                    //display the search history when there are some records
-                    if(newDAOFactory.getSearchRecorDAOImp().display().length != 0)
-                        replaceFragment( historyFragment );
-                    else
-                        removeFragment( historyFragment );
-
                     //dynamically display search results
 
                     if(tagId!=26) {
@@ -100,11 +107,6 @@ public class SearchActivity extends AppCompatActivity {
                     searchKeywords = s;
 
                 }else{
-
-                    if(newDAOFactory.getSearchRecorDAOImp().display().length != 0)
-                        replaceFragment( historyFragment );
-                    else
-                        removeFragment( historyFragment );
 
                     if(tagId!=26) {
                         newSearchAdapter.setSearchActions(newDAOFactory.getActionDAOImpInstance().combineSearch(s, newDAOFactory.getT_ADAOImp().getActionIdByTagId(tagId)));

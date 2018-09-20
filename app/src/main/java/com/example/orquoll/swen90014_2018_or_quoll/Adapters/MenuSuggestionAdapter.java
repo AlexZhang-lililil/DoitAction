@@ -19,13 +19,22 @@ import com.example.orquoll.swen90014_2018_or_quoll.R;
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 
+import java.util.HashSet;
+import java.util.Random;
+
 
 public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAdapter.LinearViewHolder> {
 
     private Context mContext;
+    private Action[] actions;
+    private Random newRandom;
+    private HashSet<Integer> indexHashSet;
 
     public MenuSuggestionAdapter(Context context){
         this.mContext = context;
+        this.actions = newDAOFactory.getActionDAOImpInstance().display();
+        this.newRandom = new Random();
+        this.indexHashSet = new HashSet<Integer>();
     }
 
 
@@ -40,11 +49,14 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
     @Override
     public void onBindViewHolder(@NonNull MenuSuggestionAdapter.LinearViewHolder viewHolder, int i) {
 
-        Action[] actions = new Action[newDAOFactory.getActionDAOImpInstance().display().length];
-        actions = newDAOFactory.getActionDAOImpInstance().display();
-        final String tittle = actions[i].getActionTittle();
-        final String des = actions[i].getActionDes();
-        final Long id = actions[i].getId();
+        int index = newRandom.nextInt(actions.length);
+        while(indexHashSet.contains(index)){
+            index = newRandom.nextInt(actions.length);
+            indexHashSet.add(index);
+        }
+        final String tittle = actions[index].getActionTittle();
+        final String des = actions[index].getActionDes();
+        final Long id = actions[index].getId();
         viewHolder.action_tittle.setText(tittle);
         viewHolder.action_des.loadData( des,"text/html","UTF-8" );
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -53,10 +65,6 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
                 Intent intent = new Intent();
                 intent.setClass( mContext,ActionActivity.class );
                 Bundle actionBundle = new Bundle();
-                /* drop
-                actionBundle.putString("Tittle",tittle);
-                actionBundle.putString("Content",);
-                */
                 actionBundle.putLong("Id",id);
                 intent.putExtras( actionBundle );
                 mContext.startActivity(intent);
@@ -67,9 +75,8 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
 
     @Override
     public int getItemCount() {
-
-        return newDAOFactory.getActionDAOImpInstance().display().length;
-    }
+        return 10;
+        }
 
     class LinearViewHolder extends RecyclerView.ViewHolder {
 

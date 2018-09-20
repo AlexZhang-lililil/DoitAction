@@ -15,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
+import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.StrengthDAOImp;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
+import com.example.orquoll.swen90014_2018_or_quoll.entity.Strength;
 
 public class ActionActivity extends AppCompatActivity {
 
@@ -27,6 +29,9 @@ public class ActionActivity extends AppCompatActivity {
     private Button btn_bookmark;
     private DAOFactory newDAOFactory;
     private Button btn_did_it;
+    private TextView action_contribution;
+    private Action thisAction;
+    private Strength[] relativeStrength;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +44,12 @@ public class ActionActivity extends AppCompatActivity {
         txt_tittle = (TextView)findViewById( R.id.txt_action_tittle );
         btn_bookmark = (Button)findViewById(R.id.btn_mark);
         btn_did_it = (Button) findViewById( R.id.btn_did_it );
+        action_contribution = (TextView) findViewById(R.id.action_contribution);
         newDAOFactory = new DAOFactory();
+        Bundle actionBundle = getIntent().getExtras();
+        id = actionBundle.getLong("Id");
+        thisAction = newDAOFactory.getActionDAOImpInstance().searchById( id );
+        getStrength();
 
         btn_back.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -47,6 +57,7 @@ public class ActionActivity extends AppCompatActivity {
                 finish();
             }
         } );
+
         btn_did_it.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,13 +72,19 @@ public class ActionActivity extends AppCompatActivity {
             }
         } );
 
-        Bundle actionBundle = getIntent().getExtras();
-
-        id = actionBundle.getLong("Id");
-
         setMarkState(id);
 
-        Action thisAction = newDAOFactory.getActionDAOImpInstance().searchById( id );
+        String contributes = ("This action contributes to your:\n");
+        if(relativeStrength.length!=0){
+            for(int i =0;i<relativeStrength.length;i++){
+                contributes = contributes+relativeStrength[i].getStrength_Title();
+            }
+        }else{
+            contributes = " ";
+        }
+
+        action_contribution.setText(contributes);
+
         txt_content.setWebViewClient( new WebViewClient() );
         txt_content.getSettings().setJavaScriptEnabled( true );
         txt_content.loadData( thisAction.getActionContent(),"text/html","UTF-8" );
@@ -119,6 +136,16 @@ public class ActionActivity extends AppCompatActivity {
             }
         } );
         newAlert.show();
+    }
+
+    private void getStrength(){
+        Long[] strengthId = newDAOFactory.getS_ADAOImp().getSIdByAId(thisAction.getActionId());
+        StrengthDAOImp strengthDAOImp = newDAOFactory.getStrengthDAOImp();
+        Strength[] strengths = new Strength[strengthId.length];
+        for(int i=0;i<strengths.length;i++){
+            strengths[i] = strengthDAOImp.getStrengthById(strengthId[i]);
+        }
+        relativeStrength = strengths;
     }
 }
 

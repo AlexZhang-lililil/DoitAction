@@ -16,6 +16,7 @@ public class TagData {
     }
 
     public void saveAll(){
+        saveTag("No filters",0,25);
         saveTag("Coping with bad days",0,1);
         saveTag("Anxiety and stress",0,2);
         saveTag("Social life",0,3);
@@ -39,7 +40,6 @@ public class TagData {
         saveTag("Stories like yours",8,22);
         saveTag("Strengths",6,23);
         saveTag("Changing a habit",9,24);
-        saveTag("No filters",0,25);
         saveTag("No filters",25,26);
     }
 }
