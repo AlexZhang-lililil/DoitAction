@@ -14,5 +14,7 @@ public class DAOFactory {
 
     public S_ADAOImp getS_ADAOImp(){return new S_ADAOImp();}
 
-    public T_ADAOImp getT_ADAOImp() {return new T_ADAOImp();}
+    public TagDAOImp getTagDAOImp(){return new TagDAOImp();}
+
+    public T_ADAOImp getT_ADAOImp(){return new T_ADAOImp();}
 }

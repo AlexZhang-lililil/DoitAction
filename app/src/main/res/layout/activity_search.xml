@@ -30,22 +30,57 @@
             />
     </Toolbar>
 
-    <SearchView
-        android:id="@+id/srh"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:queryHint="Search and Do it!"
-        android:background="@drawable/search_shape" />
+        android:orientation="horizontal">
+
+        <SearchView
+            android:id="@+id/srh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:queryHint="Search and Do it!"
+            android:background="@drawable/search_shape"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="6"
+            android:background="@drawable/icon_history"
+            android:id="@+id/btn_search_history"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner_parent_tag"
+            android:layout_weight="1"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner_tag"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/fl_container">
-
-
     </FrameLayout>
-
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

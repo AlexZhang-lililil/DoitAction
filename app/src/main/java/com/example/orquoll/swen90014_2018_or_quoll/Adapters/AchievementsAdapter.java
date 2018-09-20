@@ -35,6 +35,7 @@ public class AchievementsAdapter extends RecyclerView.Adapter <AchievementsAdapt
         private ImageView achieveImg;
         private TextView achieveTitle,lvl;
         private ProgressBar achievementProgress;
+        private TextView achievePoint;
 
         public LinearViewHolder(View itemView){
             super(itemView);
@@ -42,6 +43,8 @@ public class AchievementsAdapter extends RecyclerView.Adapter <AchievementsAdapt
             achievementProgress = (ProgressBar)itemView.findViewById( R.id.achievement_progressbar );
             achieveTitle = (TextView) itemView.findViewById( R.id.achievement_title );
             lvl = (TextView) itemView.findViewById( R.id.achievement_level );
+            achievePoint = (TextView) itemView.findViewById(R.id.achievement_progress);
+
         }
     }
 
@@ -55,12 +58,12 @@ public class AchievementsAdapter extends RecyclerView.Adapter <AchievementsAdapt
     public void onBindViewHolder(@NonNull AchievementsAdapter.LinearViewHolder viewHolder, int i) {
         this.strengths = newDAOFactory.getStrengthDAOImp().display();
 
-        int level = strengths[i].getPoints()/50;
+        int level = strengths[i].getPoints()/25;
         viewHolder.achieveImg.setImageResource(strengths[i].getDrawableId());
         viewHolder.achieveTitle.setText(strengths[i].getStrength_Title());
         viewHolder.lvl.setText("Current Level :"+ level );
-        viewHolder.achievementProgress.setMax(50);
-        viewHolder.achievementProgress.setProgress(strengths[i].getPoints()-level*50);
+        viewHolder.achievementProgress.setProgress(strengths[i].getPoints()-level*25);
+        viewHolder.achievePoint.setText((strengths[i].getPoints()-level*25)+"/25");
         final Long idInBundle =strengths[i].getId();
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

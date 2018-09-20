@@ -7,7 +7,7 @@ public class Tag_Action extends LitePalSupport{
     long action_Id;
     long tag_Id;
 
-    public Tag_Action(long action_Id, long tag_Id) {
+    public Tag_Action(long tag_Id, long action_Id) {
         this.action_Id = action_Id;
         this.tag_Id = tag_Id;
     }

@@ -25,6 +25,7 @@ public class MyStrengthActivity extends AppCompatActivity {
     private Strength thisStrength;
     private ProgressBar progressBar;
     private Bundle bundle;
+    private TextView strengthPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class MyStrengthActivity extends AppCompatActivity {
         strengthTitle = (TextView) findViewById(R.id.my_strength_title);
         currentLevel = (TextView) findViewById(R.id.my_strength_level);
         progressBar = (ProgressBar) findViewById(R.id.my_strength_progress);
+        strengthPoint = (TextView) findViewById(R.id.strength_point);
         DAOFactory newDAOFactory = new DAOFactory();
         this.bundle = getIntent().getExtras();
 
@@ -65,12 +67,12 @@ public class MyStrengthActivity extends AppCompatActivity {
     }
 
     private void setStrength(){
-        int level = thisStrength.getPoints()/50;
+        int level = thisStrength.getPoints()/25;
         strengthTitle.setText(thisStrength.getStrength_Title());
         strengthImage.setImageResource(thisStrength.getDrawableId());
         currentLevel.setText("Current level is "+level);
-        progressBar.setMax(50);
-        progressBar.setProgress(thisStrength.getPoints()-level*50);
-
+        progressBar.setMax(25);
+        progressBar.setProgress(thisStrength.getPoints()-level*25);
+        strengthPoint.setText((thisStrength.getPoints()-level*25)+"/25");
     }
 }

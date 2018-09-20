@@ -28,8 +28,8 @@
                 <gradient
                     android:angle="270"
                     android:centerColor="#11EEEE"
-                    android:endColor="#00FFFF"
-                    android:startColor="#44BBBB" />
+                    android:endColor="#FFFFFF"
+                    android:startColor="#66FFFF" />
                 <padding android:bottom="2dp" android:left="2dp" android:right="2dp" android:top="2dp"/>
             </shape>
         </clip>

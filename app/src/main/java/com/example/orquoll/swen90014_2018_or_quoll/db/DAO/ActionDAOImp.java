@@ -8,6 +8,7 @@ import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ActionDAOImp implements ActionDAO {
@@ -122,6 +123,21 @@ public class ActionDAOImp implements ActionDAO {
             actions[i] = searchByActionId(actions_Id[i]);
         }
         return actions;
+    }
+
+    public Action[] combineSearch(String keywords,Long[] action_Id){
+        Action[] actions1 = fuzzySearch(keywords);
+        Action[] actions2 = showActionByIds(action_Id);
+        List<Action> actionlist1 = new ArrayList<Action>();
+        List<Action> actionlist2 = Arrays.asList(actions2);
+       for(int i=0;i<actions1.length;i++){
+           for(int m = 0;m<actionlist2.size();m++){
+               if(actionlist2.get(m).getId() == actions1[i].getId())
+                   actionlist1.add(actionlist2.get(m));
+           }
+       }
+       Action[] result = new Action[actionlist1.size()];
+       return actionlist1.toArray(result);
     }
 
 }
