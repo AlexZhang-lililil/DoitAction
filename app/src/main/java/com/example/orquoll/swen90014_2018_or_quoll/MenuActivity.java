@@ -20,6 +20,7 @@ import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
 
 import org.litepal.tablemanager.Connector;
+import org.w3c.dom.Text;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -31,10 +32,10 @@ public class MenuActivity extends AppCompatActivity {
     private TextView txt_history;
     private TextView txt_achievement;
     private TextView txt_setting;
+    private TextView txt_browse;
     private RecyclerView rv_suggestion;
-    private Button btn_test;
-    private Button btn_test2;
     private DAOFactory newFactory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +43,17 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         newFactory = new DAOFactory();
+        final MenuSuggestionAdapter newMenuSuggestionAdapter = new MenuSuggestionAdapter( this );
         btn_menu = (Button) findViewById(R.id.btn_menu);
         txt_setting = (TextView) findViewById(R.id.txt_setting);
         dlo_menu = (DrawerLayout) findViewById(R.id.dlo_menu) ;
         txt_achievement = (TextView) findViewById(R.id.txt_achievements);
         txt_bookmark = (TextView) findViewById(R.id.txt_bookmarks);
         txt_history = (TextView) findViewById(R.id.txt_suggestion_history);
+        txt_browse = (TextView) findViewById(R.id.txt_browse);
         btn_search = (Button) findViewById(R.id.btn_search);
         rv_suggestion = (RecyclerView)findViewById(R.id.rv_suggestion);
-        btn_test = (Button) findViewById( R.id.btn_test );
-        btn_test2 = (Button) findViewById( R.id.btn_test2 );
+
 
 
         btn_menu.setOnClickListener(new View.OnClickListener() {
@@ -64,33 +66,8 @@ public class MenuActivity extends AppCompatActivity {
         setListeners();
 
         rv_suggestion.setLayoutManager(new LinearLayoutManager(MenuActivity.this));
-        rv_suggestion.setAdapter(new MenuSuggestionAdapter(MenuActivity.this));
+        rv_suggestion.setAdapter(newMenuSuggestionAdapter);
         rv_suggestion.addItemDecoration(new Decoration());
-
-
-        //test
-        btn_test.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Action action_1 = new Action("Mindful Thoughts Practise","Lorem ipsum dolor sit amet",false);
-                Action action_2 = new Action("Mindful Thoughts Practise2","Lorem ipsum dolor sit amet",false);
-                Action action_3 = new Action("Mindful Thoughts Practise3","Lorem ipsum dolor sit amet",false);
-                Action action_4 = new Action("Mindful Thoughts Practise4","Lorem ipsum dolor sit amet",false);
-                newFactory.getActionDAOImpInstance().insert(action_1);
-                newFactory.getActionDAOImpInstance().insert(action_2);
-                newFactory.getActionDAOImpInstance().insert(action_3);
-                newFactory.getActionDAOImpInstance().insert(action_4);
-
-            }
-        } );
-
-        btn_test2.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newFactory.getActionDAOImpInstance().display();
-            }
-        } );
 
     }
 
@@ -101,6 +78,7 @@ public class MenuActivity extends AppCompatActivity {
         txt_achievement.setOnClickListener(onclick);
         btn_search.setOnClickListener(onclick);
         txt_setting.setOnClickListener(onclick);
+        txt_browse.setOnClickListener(onclick);
     }
 
     private class Onclick implements View.OnClickListener{
@@ -125,6 +103,8 @@ public class MenuActivity extends AppCompatActivity {
                 case R.id.txt_setting:
                     intent = new Intent(MenuActivity.this,SettingActivity.class);
                     break;
+                case R.id.txt_browse:
+                    intent = new Intent(MenuActivity.this,BrowseActivity.class);
             }
             startActivity(intent);
         }

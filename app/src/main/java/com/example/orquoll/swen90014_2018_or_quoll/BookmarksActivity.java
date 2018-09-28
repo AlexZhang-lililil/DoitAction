@@ -14,6 +14,7 @@ public class BookmarksActivity extends AppCompatActivity {
 
     private Button btn_back;
     private RecyclerView rv_bookmarks;
+    private BookmarksAdapter newBookmarksAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class BookmarksActivity extends AppCompatActivity {
 
         btn_back = (Button) findViewById(R.id.btn_back_bookmarks);
         rv_bookmarks = (RecyclerView) findViewById((R.id.rv_bookmarks));
+        newBookmarksAdapter = new BookmarksAdapter(this);
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,10 +33,15 @@ public class BookmarksActivity extends AppCompatActivity {
         });
 
         rv_bookmarks.setLayoutManager(new LinearLayoutManager(BookmarksActivity.this));
-        rv_bookmarks.setAdapter(new BookmarksAdapter(BookmarksActivity.this));
+        rv_bookmarks.setAdapter(newBookmarksAdapter);
         rv_bookmarks.addItemDecoration(new Decoration());
 
+    }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        newBookmarksAdapter.notifyDataSetChanged();
     }
 
     class Decoration extends RecyclerView.ItemDecoration{

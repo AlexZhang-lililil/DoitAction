@@ -30,36 +30,61 @@
             />
     </Toolbar>
 
-    <SearchView
-        android:id="@+id/srh"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:queryHint="Search and Do it!"
-        android:background="@drawable/search_shape" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txt_recentsearches"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
-        android:text="?android:attr/candidatesTextStyleSpans"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/box_searchbar"
-        tools:text="Recent Searches ..." />
+        <SearchView
+            android:id="@+id/srh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:queryHint="Search and Do it!"
+            android:background="@drawable/search_shape"
+            android:layout_weight="1"/>
 
-    <MultiAutoCompleteTextView
-        android:id="@+id/box_searchbar"
-        android:layout_width="250dp"
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="6"
+            android:background="@drawable/icon_history"
+            android:id="@+id/btn_search_history"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner_parent_tag"
+            android:layout_weight="1"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner_tag"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="MultiAutoCompleteTextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb_bookmarks"
-        tools:text="Search" />
+        android:id="@+id/fl_container">
+    </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_search"
+        android:background="@color/lightGray"></android.support.v7.widget.RecyclerView>
 </LinearLayout>

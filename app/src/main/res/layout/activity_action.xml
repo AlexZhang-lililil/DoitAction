@@ -40,12 +40,7 @@
         android:layout_height="match_parent"
         android:padding="20dp"
         android:orientation="vertical">
-        <ImageView
-            android:layout_width="300dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center"
-            android:background="@color/lightGray"
-            android:id="@+id/img_action"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +49,7 @@
             android:textAlignment="center"
             android:id="@+id/txt_action_tittle"
             android:layout_marginTop="10dp"/>
-        <TextView
+        <WebView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="this is content"
@@ -63,6 +58,21 @@
             android:id="@+id/txt_action_content"
             android:layout_marginTop="20dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="contributes"
+            android:id="@+id/action_contribution"/>
+        <Button
+            android:id="@+id/btn_did_it"
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:text="Did It!"
+            android:textSize="20sp"
+            android:textColor="@color/transparent"
+            android:background="@drawable/button_press"
+            android:layout_marginTop="15dp"/>
 
     </LinearLayout>
     </ScrollView>

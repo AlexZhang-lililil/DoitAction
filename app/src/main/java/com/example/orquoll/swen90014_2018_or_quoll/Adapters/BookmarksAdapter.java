@@ -42,14 +42,14 @@ public class BookmarksAdapter extends RecyclerView.Adapter<BookmarksAdapter.Line
         viewHolder.action_Content.setText(actions[i].getActionContent());
         final String tittle = actions[i].getActionTittle();
         final String content = actions[i].getActionContent();
-        final String id = actions[i].getId();
+        final long id = actions[i].getId();
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent  = new Intent ();
                 intent.setClass(mContext, ActionActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("Id",id);
+                bundle.putLong("Id",id);
                 bundle.putString("Tittle",tittle);
                 bundle.putString("Content",content);
                 intent.putExtras(bundle);

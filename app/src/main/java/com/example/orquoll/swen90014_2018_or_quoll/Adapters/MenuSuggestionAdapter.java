@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,13 +19,22 @@ import com.example.orquoll.swen90014_2018_or_quoll.R;
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 
+import java.util.HashSet;
+import java.util.Random;
+
 
 public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAdapter.LinearViewHolder> {
 
     private Context mContext;
+    private Action[] actions;
+    private Random newRandom;
+    private HashSet<Integer> indexHashSet;
 
     public MenuSuggestionAdapter(Context context){
         this.mContext = context;
+        this.actions = newDAOFactory.getActionDAOImpInstance().display();
+        this.newRandom = new Random();
+        this.indexHashSet = new HashSet<Integer>();
     }
 
 
@@ -37,22 +49,23 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
     @Override
     public void onBindViewHolder(@NonNull MenuSuggestionAdapter.LinearViewHolder viewHolder, int i) {
 
-        Action[] actions = new Action[newDAOFactory.getActionDAOImpInstance().display().length];
-        actions = newDAOFactory.getActionDAOImpInstance().display();
-        final String tittle = actions[i].getActionTittle();
-        final String content = actions[i].getActionContent();
-        final String id = actions[i].getId();
+        int index = newRandom.nextInt(actions.length);
+        while(indexHashSet.contains(index)){
+            index = newRandom.nextInt(actions.length);
+            indexHashSet.add(index);
+        }
+        final String tittle = actions[index].getActionTittle();
+        final String des = actions[index].getActionDes();
+        final Long id = actions[index].getId();
         viewHolder.action_tittle.setText(tittle);
-        viewHolder.action_content.setText(content);
+        viewHolder.action_des.loadData( des,"text/html","UTF-8" );
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass( mContext,ActionActivity.class );
                 Bundle actionBundle = new Bundle();
-                actionBundle.putString("Tittle",tittle);
-                actionBundle.putString("Content",content);
-                actionBundle.putString("Id",id);
+                actionBundle.putLong("Id",id);
                 intent.putExtras( actionBundle );
                 mContext.startActivity(intent);
             }
@@ -62,20 +75,23 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
 
     @Override
     public int getItemCount() {
-
-        return newDAOFactory.getActionDAOImpInstance().display().length;
-    }
+        return 10;
+        }
 
     class LinearViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView action_tittle,action_content;
+        private TextView action_tittle;
+        private WebView action_des;
         private ImageView action_image;
 
         public LinearViewHolder(@NonNull View itemView) {
             super(itemView);
-            action_content = (TextView)itemView.findViewById(R.id.aciton_content);
+            action_des = (WebView)itemView.findViewById(R.id.aciton_content);
             action_tittle = (TextView)itemView.findViewById(R.id.aciton_tittle);
             action_image = (ImageView) itemView.findViewById(R.id.action_images);
+
+            action_des.setWebViewClient( new WebViewClient() );
+            action_des.getSettings().setJavaScriptEnabled( true );
         }
     }
 }
