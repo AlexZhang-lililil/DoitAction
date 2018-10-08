@@ -18,13 +18,21 @@ import android.widget.Toast;
 import com.example.orquoll.swen90014_2018_or_quoll.Adapters.MenuSuggestionAdapter;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
+import com.example.orquoll.swen90014_2018_or_quoll.http.GetPlace;
 
 import org.litepal.tablemanager.Connector;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 
 public class MenuActivity extends AppCompatActivity {
 
+    private Button btn_test;
     private Button btn_search;
     private Button btn_menu ;
     private DrawerLayout dlo_menu;
@@ -33,6 +41,7 @@ public class MenuActivity extends AppCompatActivity {
     private TextView txt_achievement;
     private TextView txt_setting;
     private TextView txt_browse;
+    private TextView txt_content;
     private RecyclerView rv_suggestion;
     private DAOFactory newFactory;
 
@@ -53,6 +62,17 @@ public class MenuActivity extends AppCompatActivity {
         txt_browse = (TextView) findViewById(R.id.txt_browse);
         btn_search = (Button) findViewById(R.id.btn_search);
         rv_suggestion = (RecyclerView)findViewById(R.id.rv_suggestion);
+        //test button
+        btn_test = (Button) findViewById(R.id.btn_test);
+        txt_content = (TextView) findViewById(R.id.txt_content);
+
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendRequest();
+            }
+        });
+
 
 
 
@@ -116,5 +136,33 @@ public class MenuActivity extends AppCompatActivity {
             super.getItemOffsets(outRect,view,parent,state);
             outRect.set(0,0,0,getResources().getDimensionPixelOffset(R.dimen.divider));
         }
+    }
+
+    private void showResponse(final String responseData){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                txt_content.setText(responseData);
+            }
+        });
+    }
+
+    private void sendRequest(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    OkHttpClient client = new OkHttpClient();
+                    Request newRequest = new Request.Builder()
+                            .url("http://baidu.com").build();
+                    Response response = client.newCall(newRequest).execute();
+                    String responseData = response.body().string();
+                    showResponse(responseData);
+
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }
