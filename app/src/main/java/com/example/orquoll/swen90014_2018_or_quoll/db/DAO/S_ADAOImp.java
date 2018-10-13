@@ -20,7 +20,6 @@ public class S_ADAOImp {
         for (int i = 0; i < actions.length; i++) {
 
             List<Strength_Action> strength_actions = LitePal.where( "action_id = ?", new Long( actions[i].getActionId() ).toString() ).find( Strength_Action.class );
-            Log.d("dddd",String.valueOf( actions[i].getActionId() ));
             for (int m = 0; m < strength_actions.size(); m++) {
                 boolean isInserted = false;
                 for (int n = 0; n < allStrength.size(); n++) {

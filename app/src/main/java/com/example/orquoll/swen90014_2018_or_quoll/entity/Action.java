@@ -10,6 +10,15 @@ public class Action extends LitePalSupport {
     private boolean actionDone;
     private long actionId;
     private long id;
+    private String doneDate;
+
+    public String getDoneDate() {
+        return doneDate;
+    }
+
+    public void setDoneDate(String doneDate) {
+        this.doneDate = doneDate;
+    }
 
     public Action(String actionTittle, String actionContent, boolean actionMarked) {
         this.actionTitle = actionTittle;

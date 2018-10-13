@@ -32,26 +32,32 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.LinearVi
     class LinearViewHolder extends RecyclerView.ViewHolder{
         private TextView action_title;
         private WebView action_des;
+        private TextView complete_Date;
+
         public LinearViewHolder(View itemview){
             super(itemview);
-            action_title = (TextView) itemview.findViewById( R.id.aciton_tittle );
-            action_des = (WebView)itemview.findViewById( R.id.aciton_content );
+            action_title = (TextView) itemview.findViewById( R.id.aciton_tittle_history );
+            action_des = (WebView)itemview.findViewById( R.id.aciton_content_history );
+            complete_Date = (TextView) itemview.findViewById(R.id.completeDate);
         }
     }
     @NonNull
     @Override
     public HistoryAdapter.LinearViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new LinearViewHolder( LayoutInflater.from( mContext ).inflate( R.layout.layout_list_suggestion,viewGroup,false ) );
+        return new LinearViewHolder( LayoutInflater.from( mContext ).inflate( R.layout.layout_list_donehistory,viewGroup,false ) );
     }
 
     @Override
     public void onBindViewHolder(@NonNull HistoryAdapter.LinearViewHolder viewHolder, int i) {
         String actionTitle = doneActions[i].getActionTittle();
         String actionDes = doneActions[i].getActionDes();
+        String completeDate = doneActions[i].getDoneDate();
+
         final Long actionId = doneActions[i].getId();
         viewHolder.action_title.setText( actionTitle );
         viewHolder.action_des.setWebViewClient( new WebViewClient() );
         viewHolder.action_des.loadData( actionDes,"text/html","utf-8" );
+        viewHolder.complete_Date.setText("Complete Time: "+completeDate);
 
         viewHolder.itemView.setOnClickListener( new View.OnClickListener() {
             @Override

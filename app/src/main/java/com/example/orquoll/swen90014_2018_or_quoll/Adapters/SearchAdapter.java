@@ -65,8 +65,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.LinearView
             viewHolder.action_des.getSettings().setJavaScriptEnabled( true );
             viewHolder.action_des.setWebViewClient( new WebViewClient() );
             viewHolder.action_des.loadData( des,"text/html","UTF-8" );
-
-            Log.d("ttt",searchActions[i].getActionTittle());
             viewHolder.itemView.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -87,12 +87,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        getLocationPermission();
-        mGeoDataClient = Places.getGeoDataClient(this, null);
-        mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
-
-        getLocationPermission();
-        notifyAction();
 
     }
 
@@ -148,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         likelyPlaces.release();
+
                     }
                 });
             }

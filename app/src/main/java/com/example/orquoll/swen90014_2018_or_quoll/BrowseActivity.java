@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.orquoll.swen90014_2018_or_quoll.Adapters.BrowseAdapter;
+import com.example.orquoll.swen90014_2018_or_quoll.NotifyAction.LocationTrigger;
+import com.example.orquoll.swen90014_2018_or_quoll.NotifyAction.TriggerStrategy;
 
 public class BrowseActivity extends AppCompatActivity {
 
@@ -31,5 +33,8 @@ public class BrowseActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        LocationTrigger newTrigger = new LocationTrigger(this,this);
+
     }
 }

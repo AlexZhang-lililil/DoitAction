@@ -7,8 +7,10 @@ import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 
 import org.litepal.LitePal;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class ActionDAOImp implements ActionDAO {
@@ -111,8 +113,18 @@ public class ActionDAOImp implements ActionDAO {
     public void doAction(Long actionId){
         Action actionDone = new Action();
         actionDone = searchById(actionId);
+
+        //get current time
+        SimpleDateFormat newFormat = new SimpleDateFormat("dd-MM-YYYY HH:mm");
+        Date currentTime = new Date(System.currentTimeMillis());
+        String doneDate = newFormat.format(currentTime);
+
         if(!actionDone.isActionDone()){
             actionDone.setActionDone(true);
+            actionDone.setDoneDate(doneDate);
+            actionDone.update(Long.valueOf(actionId));
+        }else{
+            actionDone.setDoneDate(doneDate);
             actionDone.update(Long.valueOf(actionId));
         }
     }
