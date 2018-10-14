@@ -64,7 +64,7 @@ public class LocationTrigger implements TriggerStrategy {
     }
 
     //get Location Permission service
-    private void getLocationPermission(){
+    public void getLocationPermission(){
         String[] permissions = { ACCESS_COARSE_LOCATION,
                 ACCESS_FINE_LOCATION};
         if(ContextCompat.checkSelfPermission( mContext,ACCESS_COARSE_LOCATION ) == PackageManager.PERMISSION_GRANTED){
@@ -76,7 +76,6 @@ public class LocationTrigger implements TriggerStrategy {
         }else{
             ActivityCompat.requestPermissions( mActivity,permissions,123 );
         }
-        Log.d("permission",String.valueOf( mLocationPermitted ));
     }
 
     //get current location and it's place type

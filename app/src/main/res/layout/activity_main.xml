@@ -24,28 +24,31 @@
         android:hint="Username"
         android:textSize="15sp"
         android:textColor="@color/black"
+        android:visibility="invisible"
         />
     >
     <EditText
         android:id="@+id/edittext_password"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:hint="Password"
         android:textSize="15sp"
         android:textColor="@color/black"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:visibility="invisible"/>
     >
+
     <Button
         android:id="@+id/btn_login"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
         android:layout_gravity="center"
+        android:layout_marginTop="50dp"
         android:background="@drawable/button_press"
-        android:textColor="#FFFFFF"
-        android:text="Log in"/>
+        android:text="Get Start!"
+        android:textColor="#FFFFFF" />
 
 
 </LinearLayout>
