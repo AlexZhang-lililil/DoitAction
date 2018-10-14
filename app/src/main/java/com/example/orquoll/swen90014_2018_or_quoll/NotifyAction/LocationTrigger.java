@@ -58,7 +58,9 @@ public class LocationTrigger implements TriggerStrategy {
         getLocationPermission();
         mGeoDataClient = Places.getGeoDataClient(mContext, null);
         mPlaceDetectionClient = Places.getPlaceDetectionClient(mContext, null);
-        return getCurrenctLocation();
+        Action[] actions =  getCurrenctLocation();
+        Log.d("actionsNum",String.valueOf( actions.length ));
+        return actions;
     }
 
     //get Location Permission service
@@ -103,15 +105,13 @@ public class LocationTrigger implements TriggerStrategy {
                         likelyPlaces.release();
                     }
                 });
-                return getRecommend();
             }else{
                 Toast.makeText( mContext,"Your location service is closed, please open it to get relative actions",Toast.LENGTH_SHORT );
-                return null;
             }
         }catch(SecurityException e){
             Log.e( "wrong?",e.getMessage() );
-            return null;
         }
+        return getRecommend();
     }
 
     private void printTypes(){
@@ -166,9 +166,9 @@ public class LocationTrigger implements TriggerStrategy {
                 default:
                     recommendActionId.add((int)allActions[newRandom.nextInt(numOfAllActions)].getActionId());
             }
-            while(recommendActionId.size()<10){
-                recommendActionId.add((int)allActions[newRandom.nextInt(numOfAllActions)].getActionId());
-            }
+        }
+        while(recommendActionId.size()<10){
+            recommendActionId.add((int)allActions[newRandom.nextInt(numOfAllActions)].getActionId());
         }
         return transferAction( recommendActionId );
     }

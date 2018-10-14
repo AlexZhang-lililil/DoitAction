@@ -82,7 +82,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Action[] actions = newTrigger.getNotification();
-                newMenuSuggestionAdapter.setActions( getRandom() );
+                newMenuSuggestionAdapter.setActions( actions );
                 newMenuSuggestionAdapter.notifyDataSetChanged();
             }
         } );
