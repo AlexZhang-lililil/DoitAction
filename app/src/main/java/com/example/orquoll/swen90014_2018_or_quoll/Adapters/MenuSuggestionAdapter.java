@@ -27,14 +27,10 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
 
     private Context mContext;
     private Action[] actions;
-    private Random newRandom;
-    private HashSet<Integer> indexHashSet;
 
-    public MenuSuggestionAdapter(Context context){
+    public MenuSuggestionAdapter(Context context ,Action[] actions){
         this.mContext = context;
-        this.actions = newDAOFactory.getActionDAOImpInstance().display();
-        this.newRandom = new Random();
-        this.indexHashSet = new HashSet<Integer>();
+        this.actions = actions;
     }
 
 
@@ -49,14 +45,9 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
     @Override
     public void onBindViewHolder(@NonNull MenuSuggestionAdapter.LinearViewHolder viewHolder, int i) {
 
-        int index = newRandom.nextInt(actions.length);
-        while(indexHashSet.contains(index)){
-            index = newRandom.nextInt(actions.length);
-            indexHashSet.add(index);
-        }
-        final String tittle = actions[index].getActionTittle();
-        final String des = actions[index].getActionDes();
-        final Long id = actions[index].getId();
+        final String tittle = actions[i].getActionTittle();
+        final String des = actions[i].getActionDes();
+        final Long id = actions[i].getId();
         viewHolder.action_tittle.setText(tittle);
         viewHolder.action_des.loadData( des,"text/html","UTF-8" );
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -93,5 +84,9 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
             action_des.setWebViewClient( new WebViewClient() );
             action_des.getSettings().setJavaScriptEnabled( true );
         }
+    }
+
+    public void setActions(Action[] actions){
+        this.actions = actions;
     }
 }

@@ -16,11 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.orquoll.swen90014_2018_or_quoll.Adapters.MenuSuggestionAdapter;
+import com.example.orquoll.swen90014_2018_or_quoll.NotifyAction.LocationTrigger;
+import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.ActionDAOImp;
 import com.example.orquoll.swen90014_2018_or_quoll.entity.Action;
 import com.example.orquoll.swen90014_2018_or_quoll.db.DAO.DAOFactory;
 
 import org.litepal.tablemanager.Connector;
 import org.w3c.dom.Text;
+
+import java.util.HashSet;
+import java.util.Random;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -35,6 +40,8 @@ public class MenuActivity extends AppCompatActivity {
     private TextView txt_browse;
     private RecyclerView rv_suggestion;
     private DAOFactory newFactory;
+    private Button refresh;
+    private LocationTrigger newTrigger;
 
 
     @Override
@@ -43,7 +50,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         newFactory = new DAOFactory();
-        final MenuSuggestionAdapter newMenuSuggestionAdapter = new MenuSuggestionAdapter( this );
         btn_menu = (Button) findViewById(R.id.btn_menu);
         txt_setting = (TextView) findViewById(R.id.txt_setting);
         dlo_menu = (DrawerLayout) findViewById(R.id.dlo_menu) ;
@@ -53,6 +59,9 @@ public class MenuActivity extends AppCompatActivity {
         txt_browse = (TextView) findViewById(R.id.txt_browse);
         btn_search = (Button) findViewById(R.id.btn_search);
         rv_suggestion = (RecyclerView)findViewById(R.id.rv_suggestion);
+        refresh = (Button) findViewById( R.id.refresh );
+        this.newTrigger = new LocationTrigger( this,this );
+        final MenuSuggestionAdapter newMenuSuggestionAdapter = new MenuSuggestionAdapter( this,getRandom() );
 
 
 
@@ -69,6 +78,14 @@ public class MenuActivity extends AppCompatActivity {
         rv_suggestion.setAdapter(newMenuSuggestionAdapter);
         rv_suggestion.addItemDecoration(new Decoration());
 
+        refresh.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Action[] actions = newTrigger.getNotification();
+                newMenuSuggestionAdapter.setActions( getRandom() );
+                newMenuSuggestionAdapter.notifyDataSetChanged();
+            }
+        } );
     }
 
     private void setListeners (){
@@ -79,7 +96,7 @@ public class MenuActivity extends AppCompatActivity {
         btn_search.setOnClickListener(onclick);
         txt_setting.setOnClickListener(onclick);
         txt_browse.setOnClickListener(onclick);
-    }
+        }
 
     private class Onclick implements View.OnClickListener{
 
@@ -105,6 +122,7 @@ public class MenuActivity extends AppCompatActivity {
                     break;
                 case R.id.txt_browse:
                     intent = new Intent(MenuActivity.this,BrowseActivity.class);
+                    break;
             }
             startActivity(intent);
         }
@@ -116,5 +134,17 @@ public class MenuActivity extends AppCompatActivity {
             super.getItemOffsets(outRect,view,parent,state);
             outRect.set(0,0,0,getResources().getDimensionPixelOffset(R.dimen.divider));
         }
+    }
+
+    private Action[] getRandom (){
+        Random random = new Random();
+        HashSet<Action> actions = new HashSet<Action>();
+        Action[] allActions = newFactory.getActionDAOImpInstance().display();
+        while(actions.size()<10){
+            actions.add(allActions[random.nextInt(allActions.length)]);
+        }
+        Action[] randomedActions = new Action[actions.size()];
+        actions.toArray(randomedActions);
+        return randomedActions;
     }
 }

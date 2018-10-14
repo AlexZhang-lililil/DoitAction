@@ -1,5 +1,7 @@
 package com.example.orquoll.swen90014_2018_or_quoll.db.DAO;
 
+import com.example.orquoll.swen90014_2018_or_quoll.entity.Notification;
+
 public class DAOFactory {
 
     public  ActionDAOImp getActionDAOImpInstance(){
@@ -17,4 +19,8 @@ public class DAOFactory {
     public TagDAOImp getTagDAOImp(){return new TagDAOImp();}
 
     public T_ADAOImp getT_ADAOImp(){return new T_ADAOImp();}
+
+    public NotificationDAOImp getNotificationDAOImp(){
+        return new NotificationDAOImp();
+    }
 }
