@@ -27,10 +27,12 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
 
     private Context mContext;
     private Action[] actions;
+    private int suggestionNum;
 
     public MenuSuggestionAdapter(Context context ,Action[] actions){
         this.mContext = context;
         this.actions = actions;
+        this.suggestionNum = 10;
     }
 
 
@@ -66,8 +68,12 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
 
     @Override
     public int getItemCount() {
-        return 10;
-        }
+                    if(actions.length>suggestionNum){
+                        return suggestionNum;
+                    }else{
+                        return actions.length;
+                    }
+                }
 
     class LinearViewHolder extends RecyclerView.ViewHolder {
 
@@ -88,5 +94,9 @@ public class MenuSuggestionAdapter extends RecyclerView.Adapter<MenuSuggestionAd
 
     public void setActions(Action[] actions){
         this.actions = actions;
+    }
+
+    public void setSuggestionNum(int suggestionNum){
+        this.suggestionNum = suggestionNum;
     }
 }

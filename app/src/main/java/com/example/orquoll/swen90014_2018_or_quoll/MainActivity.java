@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         Connector.getDatabase();
 
         DAOFactory newDAOFactory = new DAOFactory();
+
         if(newDAOFactory.getStrengthDAOImp().display().length==0) {
 
             StrengthData strengthData = new StrengthData();
@@ -86,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
+        newDAOFactory.getSettingDAOImp().initialSetting(10);
     }
 
     private void notifyAction(){

@@ -1,5 +1,6 @@
 package com.example.orquoll.swen90014_2018_or_quoll;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -39,9 +40,10 @@ public class MenuActivity extends AppCompatActivity {
     private TextView txt_setting;
     private TextView txt_browse;
     private RecyclerView rv_suggestion;
-    private DAOFactory newFactory;
+    private DAOFactory newFactory = new DAOFactory();
     private Button refresh;
     private LocationTrigger newTrigger;
+    private final MenuSuggestionAdapter newMenuSuggestionAdapter = new MenuSuggestionAdapter( this,getRandom() );
 
 
     @Override
@@ -49,7 +51,6 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        newFactory = new DAOFactory();
         btn_menu = (Button) findViewById(R.id.btn_menu);
         txt_setting = (TextView) findViewById(R.id.txt_setting);
         dlo_menu = (DrawerLayout) findViewById(R.id.dlo_menu) ;
@@ -61,9 +62,6 @@ public class MenuActivity extends AppCompatActivity {
         rv_suggestion = (RecyclerView)findViewById(R.id.rv_suggestion);
         refresh = (Button) findViewById( R.id.refresh );
         this.newTrigger = new LocationTrigger( this,this );
-        final MenuSuggestionAdapter newMenuSuggestionAdapter = new MenuSuggestionAdapter( this,getRandom() );
-
-
 
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +85,16 @@ public class MenuActivity extends AppCompatActivity {
             }
         } );
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        int newNum = newFactory.getSettingDAOImp().getSetting().getNumber();
+        newMenuSuggestionAdapter.setSuggestionNum(newNum);
+        newMenuSuggestionAdapter.notifyDataSetChanged();
+    }
+
 
     private void setListeners (){
         Onclick onclick = new Onclick();

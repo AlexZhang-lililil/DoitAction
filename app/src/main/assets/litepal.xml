@@ -2,7 +2,7 @@
 <litepal>
     <dbname value = "Do_it" ></dbname>
 
-    <version value = "8"></version>
+    <version value = "9"></version>
 
     <list>
         <mapping class = "com.example.orquoll.swen90014_2018_or_quoll.entity.Action"></mapping>
@@ -30,5 +30,8 @@
 
     <list>
         <mapping class="com.example.orquoll.swen90014_2018_or_quoll.entity.Notification"/>
+    </list>
+    <list>
+        <mapping class="com.example.orquoll.swen90014_2018_or_quoll.entity.Setting"/>
     </list>
 </litepal>
